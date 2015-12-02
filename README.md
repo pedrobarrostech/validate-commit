@@ -24,7 +24,7 @@ validateCommit() // true
 
 ## License
 
-MIT © [Will Soto](http://github.com/paradox41)
+Apache-2.0 © [Will Soto](http://github.com/paradox41)
 
 [npm-url]: https://npmjs.org/package/validate-commit
 [npm-image]: https://img.shields.io/npm/v/validate-commit.svg?style=flat-square
