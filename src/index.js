@@ -1,12 +1,16 @@
-#!/usr/bin/env node
-
 /**
  * Git COMMIT-MSG hook for validating commit message
  * See https://docs.google.com/document/d/1rk04jEuGfk9kYzfqCuOlPTSJw3hEDZJTBN5E5f1SALo/edit
+ *
+ * Taken from https://github.com/angular/angular.js/blob/master/validate-commit-msg.js
+ * and cleaned up a bit
+ *
+ * Thanks to the Angular team!
  */
 
 import fs from 'fs';
 import util from 'util';
+import chalk from 'chalk';
 
 const MAX_LENGTH = 100;
 const PATTERN = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
@@ -28,27 +32,31 @@ var error = function() {
     // gitx does not display it
     // http://gitx.lighthouseapp.com/projects/17830/tickets/294-feature-display-hook-error-message-when-hook-fails
     // https://groups.google.com/group/gitx/browse_thread/thread/a03bcab60844b812
-    console.error('INVALID COMMIT MSG: ' + util.format.apply(null, arguments));
+    console.error(chalk.red(`INVALID COMMIT MSG: ${util.format.apply(null, arguments)}`));
 };
 
+var firstLineFromBuffer = function(buffer) {
+    return buffer.toString().split('\n').shift();
+};
 
-var validateMessage = function(message) {
+var validateMessage = function(message = '') {
+    var subject = firstLineFromBuffer(message);
     var isValid = true;
 
     if (IGNORED.test(message)) {
-        console.log('Commit message validation ignored.');
+        console.log(chalk.yellow('Commit message validation ignored.'));
         return true;
     }
 
     if (message.length > MAX_LENGTH) {
-        error('is longer than %d characters !', MAX_LENGTH);
+        error(`is longer than ${MAX_LENGTH} characters !`);
         isValid = false;
     }
 
     var match = PATTERN.exec(message);
 
     if (!match) {
-        error('does not match "<type>(<scope>): <subject>" ! was: ' + message);
+        error(`does not match "<type>(<scope>): <subject>" ! was: ${message}`);
         return false;
     }
 
@@ -57,8 +65,8 @@ var validateMessage = function(message) {
     var subject = match[4];
 
     if (!TYPES.hasOwnProperty(type)) {
-        error('"%s" is not allowed type !', type);
-        console.log('Valid types are:', Object.keys(TYPES).join(', '));
+        error(`'${type}' is not an allowed type!`);
+        console.log('Valid types are:', chalk.cyan(Object.keys(TYPES).join(', ')));
         return false;
     }
 
@@ -74,29 +82,4 @@ var validateMessage = function(message) {
     return isValid;
 };
 
-
-var firstLineFromBuffer = function(buffer) {
-    return buffer.toString().split('\n').shift();
-};
-
-
-// publish for testing
-exports.validateMessage = validateMessage;
-
-// hacky start if not run by jasmine :-D
-if (process.argv.join('').indexOf('jasmine-node') === -1) {
-    var commitMsgFile = process.argv[2];
-    var incorrectLogFile = commitMsgFile.replace('COMMIT_EDITMSG', 'logs/incorrect-commit-msgs');
-
-    fs.readFile(commitMsgFile, function(err, buffer) {
-        var msg = firstLineFromBuffer(buffer);
-
-        if (!validateMessage(msg)) {
-            fs.appendFile(incorrectLogFile, msg + '\n', function() {
-                process.exit(1);
-            });
-        } else {
-            process.exit(0);
-        }
-    });
-}
+module.exports = validateMessage;
