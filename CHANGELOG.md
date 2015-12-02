@@ -1,11 +1,10 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-# Changelog
+<a name="1.0.0"></a>
+# 1.0.0 (2015-12-02)
 
-- [v1.0.0](#v100)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+### Features
 
-### v1.0.0
+* get it all working ([188ecd0](https://github.com/paradox41/validate-commit/commit/188ecd0))
 
- * validate-commit initial commit.
+
+

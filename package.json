@@ -40,13 +40,13 @@
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha -- -R spec",
     "coveralls": "npm run coverage -s && coveralls < coverage/lcov.info",
     "postcoveralls": "rimraf ./coverage",
-    "prepublish": "npm run build -s",
+    "prepublish": "npm run build -s && npm run changelog",
     "deploy": "git pull --rebase origin master && git push origin master",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
     "postpublish": "git push origin master --follow-tags",
-    "toc": "doctoc --github --title \"# Changelog\" CHANGELOG.md"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w"
   },
   "dependencies": {
     "chalk": "^1.1.1",
@@ -58,9 +58,9 @@
     "babel-eslint": "^4.1.6",
     "babel-preset-es2015": "^6.1.18",
     "chai": "^3.4.1",
+    "conventional-changelog": "^0.5.1",
     "coveralls": "^2.11.4",
     "dependency-check": "^2.5.1",
-    "doctoc": "^0.15.0",
     "eslint": "^1.10.3",
     "isparta": "^4.0.0",
     "mocha": "^2.3.4",
