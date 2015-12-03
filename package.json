@@ -47,9 +47,9 @@
     "postcoveralls": "rimraf ./coverage",
     "prepublish": "npm run build -s",
     "deploy": "git pull --rebase origin master && git push origin master",
-    "patch": "npm version patch && npm publish",
-    "minor": "npm version minor && npm publish",
-    "major": "npm version major && npm publish",
+    "patch": "npm version patch -m 'chore(release): new patch release' && npm publish",
+    "minor": "npm version minor -m 'chore(release): new minor release' && npm publish",
+    "major": "npm version major -m 'chore(release): new major release' && npm publish",
     "postpublish": "git push origin master --follow-tags"
   },
   "dependencies": {
