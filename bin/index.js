@@ -25,7 +25,7 @@ program
             fs.readFile(commitMsgFile, function(err, buffer) {
                 var msg = firstLineFromBuffer(buffer);
 
-                if (!validateMessage(buffer)) {
+                if (!validateMessage(msg)) {
                     fs.appendFile(incorrectLogFile, `${buffer}\n`, function() {
                         process.exit(1);
                     });
