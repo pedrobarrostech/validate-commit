@@ -42,12 +42,10 @@
     "postcoveralls": "rimraf ./coverage",
     "prepublish": "npm run build -s",
     "deploy": "git pull --rebase origin master && git push origin master",
-    "patch": "npm version patch && npm run changelog && npm publish",
-    "minor": "npm version minor && npm run changelog && npm publish",
-    "major": "npm version major && npm run changelog && npm publish",
-    "postpublish": "git push origin master --follow-tags",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
-    "postchangelog": "git commit -a -m 'chore(package): new release'"
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish",
+    "postpublish": "git push origin master --follow-tags"
   },
   "dependencies": {
     "chalk": "^1.1.1",
