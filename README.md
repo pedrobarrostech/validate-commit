@@ -11,15 +11,35 @@
 ## Install
 
 ```sh
-npm i -D validate-commit
+npm i validate-commit --save-dev
 ```
 
 ## Usage
 
-```js
-import validateCommit from "validate-commit"
+### Git Hook
 
-validateCommit() // true
+Using [git-scripts](https://www.npmjs.com/package/git-scripts)
+
+```json
+"git": {
+    "scripts": {
+        "commit-msg": "validate-commit-msg $1"
+    }
+}
+```
+
+### CLI
+
+```bash
+$ validate-commit-msg 'chore(package): some message'
+```
+
+### Module
+
+```js
+var validateCommit = require('validate-commit');
+
+validateCommit('chore(package): some message'); // true
 ```
 
 ## License
