@@ -47,7 +47,7 @@
     "major": "npm version major && npm publish",
     "postpublish": "npm run changelog && git push origin master --follow-tags",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
-    "postchangelog": "git commit -m 'chore(package): update changelog'"
+    "postchangelog": "git commit -a -m 'chore(package): update changelog'"
   },
   "dependencies": {
     "chalk": "^1.1.1",
