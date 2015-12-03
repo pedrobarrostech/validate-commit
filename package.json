@@ -1,6 +1,6 @@
 {
   "name": "validate-commit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Validate Angular style commit messages",
   "main": "dist/index.js",
   "author": "Will Soto <will.soto9+github@gmail.com>",
@@ -42,9 +42,9 @@
     "postcoveralls": "rimraf ./coverage",
     "prepublish": "npm run build -s",
     "deploy": "git pull --rebase origin master && git push origin master",
-    "patch": "npm version patch && npm publish",
-    "minor": "npm version minor && npm publish",
-    "major": "npm version major && npm publish",
+    "patch": "npm version patch && npm run changelog && npm publish",
+    "minor": "npm version minor && npm run changelog && npm publish",
+    "major": "npm version major && npm run changelog && npm publish",
     "postpublish": "npm run changelog && git push origin master --follow-tags",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
     "postchangelog": "git commit -a -m 'chore(package): new release'"
