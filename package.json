@@ -45,7 +45,7 @@
     "patch": "npm version patch && npm run changelog && npm publish",
     "minor": "npm version minor && npm run changelog && npm publish",
     "major": "npm version major && npm run changelog && npm publish",
-    "postpublish": "npm run changelog && git push origin master --follow-tags",
+    "postpublish": "git push origin master --follow-tags",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
     "postchangelog": "git commit -a -m 'chore(package): new release'"
   },
