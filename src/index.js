@@ -35,12 +35,7 @@ var error = function() {
     console.error(chalk.red(`INVALID COMMIT MSG: ${util.format.apply(null, arguments)}`));
 };
 
-var firstLineFromBuffer = function(buffer) {
-    return buffer.toString().split('\n').shift();
-};
-
 var validateMessage = function(message = '') {
-    var subject = firstLineFromBuffer(message);
     var isValid = true;
 
     if (IGNORED.test(message)) {

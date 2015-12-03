@@ -25,7 +25,7 @@
     "conventional commit"
   ],
   "bin": {
-    "validate-commit-msg": "bin/index.js"
+    "validate-commit-msg": "./bin/index.js"
   },
   "scripts": {
     "clean": "rimraf dist",

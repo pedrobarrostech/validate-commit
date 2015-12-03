@@ -7,6 +7,10 @@ var package = require('../package.json');
 
 var validateMessage = require('../dist');
 
+var firstLineFromBuffer = function(buffer) {
+    return buffer.toString().split('\n').shift();
+};
+
 program
     .version(package.version)
     .description(package.description)
@@ -19,6 +23,8 @@ program
             var incorrectLogFile = commitMsgFile.replace('COMMIT_EDITMSG', 'logs/incorrect-commit-msgs');
 
             fs.readFile(commitMsgFile, function(err, buffer) {
+                var msg = firstLineFromBuffer(buffer);
+
                 if (!validateMessage(buffer)) {
                     fs.appendFile(incorrectLogFile, `${buffer}\n`, function() {
                         process.exit(1);
