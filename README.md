@@ -23,7 +23,7 @@ Using [git-scripts](https://www.npmjs.com/package/git-scripts)
 ```json
 "git": {
     "scripts": {
-        "commit-msg": "validate-commit-msg $1"
+        "commit-msg": "./node_modules/.bin/validate-commit-msg $1"
     }
 }
 ```
