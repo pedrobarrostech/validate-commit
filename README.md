@@ -19,7 +19,7 @@ npm i validate-commit --save-dev
 Even though there are a couple of other packages that do this, I wanted to release this one with a few quality of life changes.
 
 - Uses [Chalk](https://www.npmjs.com/package/chalk) to color messages
-- Outputs all the <scopes> when the scope is incorrect
+- Outputs all the scopes when the scope is incorrect
 
 ## Example
 
