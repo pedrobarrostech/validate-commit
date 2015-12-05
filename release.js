@@ -25,8 +25,7 @@ program
 
             changelog({
                 preset: 'angular',
-                infile: './CHANGELOG.md',
-                overwrite: true
+                infile: './CHANGELOG.md'
             }).pipe(fs.createWriteStream('./CHANGELOG.md'));
 
             if (program.verbose) {
