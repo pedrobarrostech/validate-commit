@@ -47,9 +47,9 @@
     "postcoveralls": "rimraf ./coverage",
     "prepublish": "npm run build -s",
     "deploy": "git pull --rebase origin master && git push origin master",
-    "patch": "npm version patch -m 'chore(release): new patch release' && npm publish",
-    "minor": "npm version minor -m 'chore(release): new minor release' && npm publish",
-    "major": "npm version major -m 'chore(release): new major release' && npm publish",
+    "patch": "node ./release patch -v && npm publish",
+    "minor": "node ./release minor -v && npm publish",
+    "major": "node ./release major -v && npm publish",
     "postpublish": "git push origin master --follow-tags"
   },
   "dependencies": {
@@ -69,7 +69,9 @@
     "git-scripts": "^0.2.1",
     "isparta": "^4.0.0",
     "mocha": "^2.3.4",
+    "mversion": "^1.10.1",
     "rimraf": "^2.4.4",
+    "simple-git": "^1.16.0",
     "trash-cli": "^1.2.0",
     "watch": "^0.16.0"
   }
