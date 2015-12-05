@@ -25,7 +25,6 @@ program
 
             changelog({
                 preset: 'angular',
-                releaseCount: 0,
                 infile: './CHANGELOG.md',
                 overwrite: true
             }).pipe(fs.createWriteStream('./CHANGELOG.md'));
