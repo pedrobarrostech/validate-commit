@@ -1,6 +1,6 @@
 {
   "name": "validate-commit",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Validate Angular style commit messages",
   "main": "dist/index.js",
   "author": "Will Soto <will.soto9+github@gmail.com>",
