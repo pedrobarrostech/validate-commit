@@ -8,60 +8,79 @@
  * Thanks to the Angular team!
  */
 
-import fs from 'fs';
-import util from 'util';
 import chalk from 'chalk';
+import defaults from 'lodash.defaults';
+import keys from 'lodash.keys';
 
-const MAX_LENGTH = 100;
-const PATTERN = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
-const IGNORED = /^WIP\:/;
-const TYPES = {
-    feat: true,
-    fix: true,
-    docs: true,
-    style: true,
-    refactor: true,
-    perf: true,
-    test: true,
-    chore: true,
-    revert: true
+import presets from './presets';
+
+const LOG_LEVELS = {
+    ERROR: {
+        color: 'red'
+    },
+    WARN: {
+        color: 'yellow'
+    },
+    INFO: {
+        color: 'cyan'
+    },
+    DEBUG: {
+        color: 'white'
+    }
 };
 
-
-var error = function() {
-    // gitx does not display it
-    // http://gitx.lighthouseapp.com/projects/17830/tickets/294-feature-display-hook-error-message-when-hook-fails
-    // https://groups.google.com/group/gitx/browse_thread/thread/a03bcab60844b812
-    console.error(chalk.red(`INVALID COMMIT MSG: ${util.format.apply(null, arguments)}`));
+var opts = {
+    preset: 'angular'
 };
 
-var validateMessage = function(message = '') {
-    var isValid = true;
+var log = function(message, severity) {
+    var color = LOG_LEVELS[severity.toUpperCase()].color || 'cyan';
 
-    if (IGNORED.test(message)) {
-        console.log(chalk.yellow('Commit message validation ignored.'));
+    /*eslint no-console: 0*/
+    console.log(chalk[color](message));
+};
+
+var validateMessage = function(message = '', options = {}) {
+
+    defaults(options, opts);
+
+    var preset = presets[options.preset];
+
+    if (!preset) {
+        log(`Preset '${options.preset}' does not exist`, 'error');
+
+        throw new Error('A preset must be provided');
+    }
+
+    if (preset.IGNORED.test(message)) {
+        log('Commit message validation ignored.', 'warn');
+
         return true;
     }
 
-    if (message.length > MAX_LENGTH) {
-        error(`is longer than ${MAX_LENGTH} characters !`);
-        isValid = false;
+    if (message.length > preset.MAX_LENGTH) {
+        log(`Message is longer than ${preset.MAX_LENGTH} characters!`, 'error');
+
+        return false;
     }
 
-    var match = PATTERN.exec(message);
+    var match = preset.PATTERN.exec(message);
 
     if (!match) {
-        error(`does not match "<type>(<scope>): <subject>" ! was: ${message}`);
+        log(`Message does not match "<type>(<scope>): <subject>" ! was: ${message}`, 'error');
+
         return false;
     }
 
     var type = match[1];
-    var scope = match[3];
-    var subject = match[4];
+    // in case they are needed
+    // var scope = match[3];
+    // var subject = match[4];
 
-    if (!TYPES.hasOwnProperty(type)) {
-        error(`'${type}' is not an allowed type!`);
-        console.log('Valid types are:', chalk.cyan(Object.keys(TYPES).join(', ')));
+    if (!preset.TYPES.hasOwnProperty(type)) {
+        log(`'${type}' is not an allowed type!`, 'error');
+        log(`Valid types are: ${keys(preset.TYPES).join(', ')}`, 'info');
+
         return false;
     }
 
@@ -74,7 +93,12 @@ var validateMessage = function(message = '') {
     // - auto correct typos in type ?
     // - store incorrect messages, so that we can learn
 
-    return isValid;
+    return true;
 };
 
 module.exports = validateMessage;
+
+export {
+    opts,
+    presets
+};
