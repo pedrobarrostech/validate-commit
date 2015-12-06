@@ -7,15 +7,6 @@ import changelog from 'gulp-conventional-changelog';
 
 import runSequence from 'run-sequence';
 
-gulp.task('documentation', function() {
-
-    return gulp.src('./src/index.js')
-        .pipe(documentation({
-            format: 'html'
-        }))
-        .pipe(gulp.dest('html-documentation'));
-});
-
 var config = {
     importance: 'patch'
 };
