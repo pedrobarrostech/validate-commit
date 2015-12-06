@@ -3,7 +3,7 @@
 var fs = require('fs');
 var program = require('commander');
 
-var package = require('../package.json');
+var pkg = require('../package.json');
 
 var validateMessage = require('../dist');
 
@@ -12,8 +12,8 @@ var firstLineFromBuffer = function(buffer) {
 };
 
 program
-    .version(package.version)
-    .description(package.description)
+    .version(pkg.version)
+    .description(pkg.description)
     .command('validate-commit-msg <message>', 'validate a message')
     .action(function(message) {
         // hacky start if this is being used as a git hook
