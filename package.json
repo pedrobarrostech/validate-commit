@@ -32,6 +32,9 @@
       "commit-msg": "./bin/index.js $1"
     }
   },
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint src test",
