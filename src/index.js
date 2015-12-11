@@ -8,6 +8,8 @@
  * Thanks to the Angular team!
  */
 
+import fs from 'fs';
+
 import chalk from 'chalk';
 import defaults from 'lodash.defaults';
 import keys from 'lodash.keys';
@@ -96,9 +98,18 @@ var validateMessage = function(message = '', options = {}) {
     return true;
 };
 
-module.exports = validateMessage;
+var firstLineFromBuffer = function(buffer) {
+    return buffer.toString().split('\n').shift();
+};
 
-export {
-    opts,
-    presets
+var validateMessageFromBuffer = function(message) {
+    var buffer = fs.readFileSync(message);
+    var msg = firstLineFromBuffer(buffer);
+
+    return validateMessage(msg);
+};
+
+module.exports = {
+    validateMessage,
+    validateMessageFromBuffer
 };
