@@ -1,3 +1,9 @@
+<a name="1.0.14"></a>
+## [1.0.14](https://github.com/paradox41/validate-commit/compare/v1.0.13...v1.0.14) (2015-12-18)
+
+
+
+
 <a name="1.0.13"></a>
 ## [1.0.13](https://github.com/paradox41/validate-commit/compare/v1.0.12...v1.0.13) (2015-12-09)
 
