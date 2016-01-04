@@ -3,7 +3,10 @@ import {
 }
 from 'chai';
 
-import {validateMessage} from '../src';
+import {
+    validateMessage, validateMessageFromBuffer
+}
+from '../src';
 
 describe('#validateMessage', function() {
     it('should return false if no message is provided', function() {
@@ -50,5 +53,15 @@ describe('#validateMessage', function() {
         };
 
         expect(f).to.throw(Error);
+    });
+});
+
+describe('#validateMessageFromBuffer', function() {
+    it('should accept a valid message', function() {
+        expect(validateMessageFromBuffer(`${__dirname}/valid.txt`)).to.be.true;
+    });
+
+    it('should reject an invalid message', function() {
+        expect(validateMessageFromBuffer(`${__dirname}/invalid.txt`)).to.be.false;
     });
 });
