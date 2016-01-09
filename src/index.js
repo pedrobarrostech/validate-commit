@@ -10,92 +10,37 @@
 
 import fs from 'fs';
 
-import chalk from 'chalk';
 import defaults from 'lodash.defaults';
-import keys from 'lodash.keys';
 
 import presets from './presets';
-
-const LOG_LEVELS = {
-    ERROR: {
-        color: 'red'
-    },
-    WARN: {
-        color: 'yellow'
-    },
-    INFO: {
-        color: 'cyan'
-    },
-    DEBUG: {
-        color: 'white'
-    }
-};
 
 var opts = {
     preset: 'angular'
 };
 
-var log = function(message, severity) {
-    var color = LOG_LEVELS[severity.toUpperCase()].color || 'cyan';
-
-    /*eslint no-console: 0*/
-    console.log(chalk[color](message));
-};
-
-var validateMessage = function(message = '', options = {}) {
+var validateMessage = function(message, options = {}) {
+    if (!message) {
+        return false;
+    }
 
     defaults(options, opts);
 
     var preset = presets[options.preset];
 
     if (!preset) {
-        log(`Preset '${options.preset}' does not exist`, 'error');
-
-        throw new Error('A preset must be provided');
+        throw new Error(`Preset '${options.preset}' does not exist. A preset must be provided`);
     }
 
-    if (preset.IGNORED.test(message)) {
-        log('Commit message validation ignored.', 'warn');
+    var {validate, ignorePattern} = preset;
+
+    if (ignorePattern && ignorePattern.test(message)) {
+        /*eslint no-console: 0*/
+        console.warn('Commit message validation ignored.');
 
         return true;
     }
 
-    if (message.length > preset.MAX_LENGTH) {
-        log(`Message is longer than ${preset.MAX_LENGTH} characters!`, 'error');
-
-        return false;
-    }
-
-    var match = preset.PATTERN.exec(message);
-
-    if (!match) {
-        log(`Message does not match "<type>(<scope>): <subject>" ! was: ${message}`, 'error');
-
-        return false;
-    }
-
-    var type = match[1];
-    // in case they are needed
-    // var scope = match[3];
-    // var subject = match[4];
-
-    if (!preset.TYPES.hasOwnProperty(type)) {
-        log(`'${type}' is not an allowed type!`, 'error');
-        log(`Valid types are: ${keys(preset.TYPES).join(', ')}`, 'info');
-
-        return false;
-    }
-
-    // Some more ideas, do want anything like this ?
-    // - allow only specific scopes (eg. fix(docs) should not be allowed ?
-    // - auto correct the type to lower case ?
-    // - auto correct first letter of the subject to lower case ?
-    // - auto add empty line after subject ?
-    // - auto remove empty () ?
-    // - auto correct typos in type ?
-    // - store incorrect messages, so that we can learn
-
-    return true;
+    return validate(message);
 };
 
 var firstLineFromBuffer = function(buffer) {
