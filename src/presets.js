@@ -67,8 +67,8 @@ module.exports = {
         return false;
       }
 
-        return true;
-      },
-      ignorePattern: /^WIP\:/
+      return true;
+    },
+    ignorePattern: /^WIP\:/
   }
 };
