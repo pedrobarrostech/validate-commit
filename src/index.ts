@@ -5,7 +5,6 @@ import * as defaults from 'lodash.defaults';
 import { Opts } from './interfaces';
 import presets from './presets';
 
-
 const validateMessage = function(message: string, options: Opts = {}): boolean {
   if (!message) {
     return false;
