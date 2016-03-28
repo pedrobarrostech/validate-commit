@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist/",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "noEmitOnError": false,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "files": [
+    "src/index.ts",
+    "typings/main.d.ts"
+  ]
+}

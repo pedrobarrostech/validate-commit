@@ -1,30 +1,31 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 
-import keys from 'lodash.keys';
+import { LogLevels, Presets } from './interfaces';
 
-const LOG_LEVELS = {
-  ERROR: {
+const LOG_LEVELS: LogLevels = {
+  error: {
     color: 'red'
   },
-  WARN: {
+  warn: {
     color: 'yellow'
   },
-  INFO: {
+  info: {
     color: 'cyan'
   },
-  DEBUG: {
+  debug: {
     color: 'white'
   }
 };
 
-var log = function(message, severity) {
-  var color = LOG_LEVELS[severity.toUpperCase()].color || 'cyan';
+type Severity = 'error' | 'warn' | 'info' | 'debug';
 
-  /*eslint no-console: 0*/
+const log = function(message: string, severity: Severity = 'info'): void {
+  const color: string = LOG_LEVELS[severity].color || 'cyan';
+
   console.log(chalk[color](message));
 };
 
-module.exports = {
+const presets: Presets = {
   angular: {
     validate(message) {
       /**
@@ -36,8 +37,8 @@ module.exports = {
        *
        * Thanks to the Angular team!
        */
-      const MAX_LENGTH = 100;
-      const PATTERN = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
+      const MAX_LENGTH: number = 100;
+      const PATTERN: RegExp = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
       const TYPES = {
         feat: true,
         fix: true,
@@ -71,7 +72,7 @@ module.exports = {
 
       if (!TYPES.hasOwnProperty(type)) {
         log(`'${type}' is not an allowed type!`, 'error');
-        log(`Valid types are: ${keys(TYPES).join(', ')}`, 'info');
+        log(`Valid types are: ${Object.keys(TYPES).join(', ')}`, 'info');
 
         return false;
       }
@@ -121,3 +122,5 @@ module.exports = {
     }
   }
 };
+
+export default presets;
