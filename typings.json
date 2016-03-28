@@ -1,10 +1,8 @@
 {
   "ambientDependencies": {
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81"
-  },
-  "ambientDevDependencies": {
     "chai": "registry:dt/chai#3.4.0+20160317120654",
-    "mocha": "registry:dt/mocha#2.2.5+20160317120654"
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "node": "registry:dt/node#4.0.0+20160319033040"
   },
   "dependencies": {
     "chalk": "registry:npm/chalk#1.0.0+20160211003958",

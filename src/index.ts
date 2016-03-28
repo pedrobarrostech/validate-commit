@@ -1,7 +1,5 @@
 import * as fs from 'fs';
 
-import * as defaults from 'lodash.defaults';
-
 import { Opts } from './interfaces';
 import presets from './presets';
 
@@ -10,9 +8,9 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
     return false;
   }
 
-  defaults(options, {
+  options = (<any>Object).assign({
     preset: 'angular'
-  });
+  }, options);
 
   const preset = presets[options.preset];
 

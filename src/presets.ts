@@ -22,7 +22,7 @@ type Severity = 'error' | 'warn' | 'info' | 'debug';
 const log = function(message: string, severity: Severity = 'info'): void {
   const color: string = LOG_LEVELS[severity].color || 'cyan';
 
-  console.log(chalk[color](message));
+  console.log((<any>chalk)[color](message));
 };
 
 const presets: Presets = {
