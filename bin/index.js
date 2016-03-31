@@ -6,7 +6,7 @@ var isFile = require('is-file');
 var pkg = require('../package.json');
 
 var validateMessage = require('../dist').validateMessage;
-var validateMessageFromBuffer = require('../dist').validateMessageFromBuffer;
+var validateMessageFromFile = require('../dist').validateMessageFromFile;
 
 program
   .version(pkg.version)
@@ -20,7 +20,7 @@ program
     };
 
     if (isFile(message)) {
-      valid = validateMessageFromBuffer(message, options);
+      valid = validateMessageFromFile(message, options);
     } else {
       valid = validateMessage(message, options);
     }

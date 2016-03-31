@@ -29,11 +29,11 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
   return validate(message);
 };
 
-var firstLineFromBuffer = function(buffer: Buffer): string {
+const firstLineFromBuffer = function(buffer: Buffer): string {
   return buffer.toString().split('\n').shift();
 };
 
-var validateMessageFromBuffer = function(pathToFile: string) {
+const validateMessageFromFile = function(pathToFile: string) {
   const buffer = fs.readFileSync(pathToFile);
   const message = firstLineFromBuffer(buffer);
 
@@ -42,5 +42,5 @@ var validateMessageFromBuffer = function(pathToFile: string) {
 
 export {
   validateMessage,
-  validateMessageFromBuffer
+  validateMessageFromFile
 };

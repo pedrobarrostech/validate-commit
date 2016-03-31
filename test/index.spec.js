@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { validateMessage, validateMessageFromBuffer } from '../dist';
+import { validateMessage, validateMessageFromFile } from '../dist';
 
 describe('#validateMessage', function() {
   it('should return false if no message is provided', function() {
@@ -19,12 +19,12 @@ describe('#validateMessage', function() {
   });
 });
 
-describe('#validateMessageFromBuffer', function() {
+describe('#validateMessageFromFile', function() {
   it('should accept a valid message', function() {
-    expect(validateMessageFromBuffer(`${__dirname}/examples/valid.txt`)).to.be.true;
+    expect(validateMessageFromFile(`${__dirname}/examples/valid.txt`)).to.be.true;
   });
 
   it('should reject an invalid message', function() {
-    expect(validateMessageFromBuffer(`${__dirname}/examples/invalid.txt`)).to.be.false;
+    expect(validateMessageFromFile(`${__dirname}/examples/invalid.txt`)).to.be.false;
   });
 });
