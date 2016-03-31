@@ -57,7 +57,7 @@ const presets: Presets = {
         return false;
       }
 
-      var match = PATTERN.exec(message);
+      const match = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<type>(<scope>): <subject>"! was: ${message}`, 'error');
@@ -65,10 +65,10 @@ const presets: Presets = {
         return false;
       }
 
-      var type = match[1];
+      const type = match[1];
       // in case they are needed
-      // var scope = match[3];
-      // var subject = match[4];
+      // const scope = match[3];
+      // const subject = match[4];
 
       if (!TYPES.hasOwnProperty(type)) {
         log(`'${type}' is not an allowed type!`, 'error');
@@ -83,8 +83,8 @@ const presets: Presets = {
   },
   atom: {
     validate(message) {
-      const MAX_LENGTH = 72;
-      const EMOJIS = [
+      const MAX_LENGTH: number = 72;
+      const EMOJIS: Array<string> = [
         ':art:',
         ':racehorse:',
         ':non-potable_water:',
@@ -101,7 +101,7 @@ const presets: Presets = {
         ':arrow_down:',
         ':shirt:'
       ];
-      const PATTERN = new RegExp(`^(${EMOJIS.join('|')})(?:\ )(?:.*)$`);
+      const PATTERN: RegExp = new RegExp(`^(${EMOJIS.join('|')})(?:\ )(?:.*)$`);
 
       if (message.length > MAX_LENGTH) {
         log(`Message is longer than ${MAX_LENGTH} characters!`, 'error');
@@ -109,7 +109,7 @@ const presets: Presets = {
         return false;
       }
 
-      var match = PATTERN.exec(message);
+      const match = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<emoji> <subject>"! was: ${message}`, 'error');
