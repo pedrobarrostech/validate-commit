@@ -1,30 +1,31 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 
-import keys from 'lodash.keys';
+import { LogLevels, Presets } from './interfaces';
 
-const LOG_LEVELS = {
-  ERROR: {
+const LOG_LEVELS: LogLevels = {
+  error: {
     color: 'red'
   },
-  WARN: {
+  warn: {
     color: 'yellow'
   },
-  INFO: {
+  info: {
     color: 'cyan'
   },
-  DEBUG: {
+  debug: {
     color: 'white'
   }
 };
 
-var log = function(message, severity) {
-  var color = LOG_LEVELS[severity.toUpperCase()].color || 'cyan';
+type Severity = 'error' | 'warn' | 'info' | 'debug';
 
-  /*eslint no-console: 0*/
-  console.log(chalk[color](message));
+const log = function(message: string, severity: Severity = 'info'): void {
+  const color: string = LOG_LEVELS[severity].color || 'cyan';
+
+  console.log((<any>chalk)[color](message));
 };
 
-module.exports = {
+const presets: Presets = {
   angular: {
     validate(message) {
       /**
@@ -36,8 +37,8 @@ module.exports = {
        *
        * Thanks to the Angular team!
        */
-      const MAX_LENGTH = 100;
-      const PATTERN = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
+      const MAX_LENGTH: number = 100;
+      const PATTERN: RegExp = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
       const TYPES = {
         feat: true,
         fix: true,
@@ -56,7 +57,7 @@ module.exports = {
         return false;
       }
 
-      var match = PATTERN.exec(message);
+      const match = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<type>(<scope>): <subject>"! was: ${message}`, 'error');
@@ -64,14 +65,14 @@ module.exports = {
         return false;
       }
 
-      var type = match[1];
+      const type = match[1];
       // in case they are needed
-      // var scope = match[3];
-      // var subject = match[4];
+      // const scope = match[3];
+      // const subject = match[4];
 
       if (!TYPES.hasOwnProperty(type)) {
         log(`'${type}' is not an allowed type!`, 'error');
-        log(`Valid types are: ${keys(TYPES).join(', ')}`, 'info');
+        log(`Valid types are: ${Object.keys(TYPES).join(', ')}`, 'info');
 
         return false;
       }
@@ -82,8 +83,8 @@ module.exports = {
   },
   atom: {
     validate(message) {
-      const MAX_LENGTH = 72;
-      const EMOJIS = [
+      const MAX_LENGTH: number = 72;
+      const EMOJIS: Array<string> = [
         ':art:',
         ':racehorse:',
         ':non-potable_water:',
@@ -100,7 +101,7 @@ module.exports = {
         ':arrow_down:',
         ':shirt:'
       ];
-      const PATTERN = new RegExp(`^(${EMOJIS.join('|')})(?:\ )(?:.*)$`);
+      const PATTERN: RegExp = new RegExp(`^(${EMOJIS.join('|')})(?:\ )(?:.*)$`);
 
       if (message.length > MAX_LENGTH) {
         log(`Message is longer than ${MAX_LENGTH} characters!`, 'error');
@@ -108,7 +109,7 @@ module.exports = {
         return false;
       }
 
-      var match = PATTERN.exec(message);
+      const match = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<emoji> <subject>"! was: ${message}`, 'error');
@@ -121,3 +122,5 @@ module.exports = {
     }
   }
 };
+
+export default presets;
