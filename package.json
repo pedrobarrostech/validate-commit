@@ -27,6 +27,7 @@
   "bin": {
     "validate-commit-msg": "./bin/index.js"
   },
+  "typings": "./dist/index.d.ts",
   "git": {
     "scripts": {
       "commit-msg": "./bin/index.js $1"
