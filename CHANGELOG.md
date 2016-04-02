@@ -8,11 +8,20 @@
 # [2.0.0](https://github.com/paradox41/validate-commit/compare/v1.0.14...v2.0.0) (2016-04-02)
 
 
+### Code Refactoring
+
+* **validate-commit:** change function name to be closer to what it actually does ([37653a9](https://github.com/paradox41/validate-commit/commit/37653a9))
+
 ### Features
 
 * add ability to pass a preset to the cli ([3db51d8](https://github.com/paradox41/validate-commit/commit/3db51d8))
 * **package:** add typings ([4d7194f](https://github.com/paradox41/validate-commit/commit/4d7194f))
 * **presets:** add atom preset ([98a7655](https://github.com/paradox41/validate-commit/commit/98a7655))
+
+
+### BREAKING CHANGES
+
+* validate-commit: validateMessageFromBuffer is now validateMessageFromFile. Not part of the public API, but breaking nonetheless.
 
 
 
@@ -84,7 +93,7 @@
 
 
 <a name="1.0.4"></a>
-## [1.0.4](https://github.com/paradox41/validate-commit/compare/v1.0.5...v1.0.4) (2015-12-03)
+## [1.0.4](https://github.com/paradox41/validate-commit/compare/v1.0.2...v1.0.4) (2015-12-03)
 
 
 ### Bug Fixes
