@@ -1,3 +1,15 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/paradox41/validate-commit/compare/v1.0.14...v2.0.0) (2016-04-02)
+
+
+### Features
+
+* add ability to pass a preset to the cli ([3db51d8](https://github.com/paradox41/validate-commit/commit/3db51d8))
+* **package:** add typings ([4d7194f](https://github.com/paradox41/validate-commit/commit/4d7194f))
+* **presets:** add atom preset ([98a7655](https://github.com/paradox41/validate-commit/commit/98a7655))
+
+
+
 <a name="1.0.14"></a>
 ## [1.0.14](https://github.com/paradox41/validate-commit/compare/v1.0.13...v1.0.14) (2015-12-18)
 
