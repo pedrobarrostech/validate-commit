@@ -38,7 +38,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "tslint `find src -name '*.ts*'`",
+    "lint": "tslint './src/**/*.ts'",
     "watch": "tsc --watch",
     "pretest": "npm run build",
     "test": "mocha --compilers js:babel-core/register",
