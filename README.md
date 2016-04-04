@@ -53,6 +53,10 @@ var validateCommit = require('validate-commit');
 validateCommit('chore(package): some message'); // true
 ```
 
+### Development
+
+`npm i && typings install`
+
 ## License
 
 Apache-2.0 © [Will Soto](http://github.com/paradox41)

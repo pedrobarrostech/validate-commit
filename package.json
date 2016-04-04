@@ -53,8 +53,7 @@
     "patch": "gulp release:patch && npm publish",
     "minor": "gulp release:minor && npm publish",
     "major": "gulp release:major && npm publish",
-    "postpublish": "git push origin master --follow-tags",
-    "postinstall": "typings install"
+    "postpublish": "git push origin master --follow-tags"
   },
   "dependencies": {
     "chalk": "^1.1.1",
