@@ -1,3 +1,13 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/paradox41/validate-commit/compare/v2.0.2...v2.0.3) (2016-04-04)
+
+
+### Bug Fixes
+
+* **package:** remove postinstall ([3420807](https://github.com/paradox41/validate-commit/commit/3420807))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/paradox41/validate-commit/compare/v2.0.1...v2.0.2) (2016-04-04)
 
