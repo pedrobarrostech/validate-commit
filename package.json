@@ -37,13 +37,13 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist typings",
     "lint": "tslint './src/**/*.ts'",
     "watch": "tsc --watch",
-    "pretest": "npm run typings:install && npm run build",
+    "pretest": "npm run build",
     "test": "mocha --compilers js:babel-core/register",
     "test-watch": "npm test -- --watch",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && npm run typings:install",
     "build": "tsc",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha -- -R spec",
     "coveralls": "npm run coverage -s && coveralls < coverage/lcov.info",
