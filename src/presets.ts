@@ -150,7 +150,7 @@ const presets: Presets = {
 
         return false;
       }
-      const matches: Array<string> = match.filter(m => m ? true : false).map((s) => s.trim())
+      const matches: Array<string> = match.filter(str => str ? true : false).map(str => str.trim())
       // Is input tag ok?
       const TAGS: Array<string> = ['Fix', 'Update', 'Breaking', 'Docs', 'Build', 'New', 'Upgrade'];
       if (TAGS.indexOf(matches[1]) === -1) {
