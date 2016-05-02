@@ -1,3 +1,19 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/paradox41/validate-commit/compare/v2.0.3...v2.1.0) (2016-05-02)
+
+
+### Bug Fixes
+
+* **build:** fix the build...hopefully([667eea9](https://github.com/paradox41/validate-commit/commit/667eea9))
+* **build:** we do need to install typings though([da9836b](https://github.com/paradox41/validate-commit/commit/da9836b))
+
+
+### Features
+
+* **presets:** eslint preset([b3893f7](https://github.com/paradox41/validate-commit/commit/b3893f7))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/paradox41/validate-commit/compare/v2.0.2...v2.0.3) (2016-04-04)
 
