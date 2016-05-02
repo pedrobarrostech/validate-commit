@@ -8,6 +8,10 @@ describe('#validateMessage', function() {
     expect(validateMessage('')).to.be.false;
   });
 
+  it('should omit validation if ignore pattern is provided', function() {
+    expect(validateMessage('WIP: ignore me')).to.be.true;
+  });
+
   it('should throw an error if no preset is provided', function() {
     var f = function() {
       validateMessage('chore(package): foo', {
