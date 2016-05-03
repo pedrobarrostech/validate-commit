@@ -1,3 +1,13 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/paradox41/validate-commit/compare/v2.1.0...v2.1.1) (2016-05-03)
+
+
+### Bug Fixes
+
+* **validate-commit:** allow validateMessageFromFile to use other presets([f1f9ba9](https://github.com/paradox41/validate-commit/commit/f1f9ba9)), closes [#6](https://github.com/paradox41/validate-commit/issues/6)
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/paradox41/validate-commit/compare/v2.0.3...v2.1.0) (2016-05-02)
 
