@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import { validateMessage, validateMessageFromFile } from '../dist';
+import presets from '../dist/presets';
 
 describe('#validateMessage', function() {
   it('should return false if no message is provided', function() {
@@ -12,8 +13,8 @@ describe('#validateMessage', function() {
     expect(validateMessage('WIP: ignore me')).to.be.true;
   });
 
-  it('should throw an error if no preset is provided', function() {
-    var f = function() {
+  it('should throw an error if no valid preset is provided', function() {
+    const f = function() {
       validateMessage('chore(package): foo', {
         preset: 'notapreset'
       });
@@ -24,11 +25,23 @@ describe('#validateMessage', function() {
 });
 
 describe('#validateMessageFromFile', function() {
-  it('should accept a valid message', function() {
-    expect(validateMessageFromFile(`${__dirname}/examples/valid.txt`)).to.be.true;
-  });
+  const validFixture = {};
+  const wrongFixture = {};
 
-  it('should reject an invalid message', function() {
-    expect(validateMessageFromFile(`${__dirname}/examples/invalid.txt`)).to.be.false;
-  });
+  for (let preset in presets) {
+    validFixture[preset] = `${__dirname}/fixtures/${preset}/valid.txt`;
+    wrongFixture[preset] = `${__dirname}/fixtures/${preset}/wrong.txt`;
+  }
+
+  for (let preset in validFixture) {
+    it(`should accept a valid message for ${preset} preset`, function() {
+      expect(validateMessageFromFile(validFixture[preset], { preset })).to.be.true;
+    });
+  }
+
+  for (let preset in wrongFixture) {
+    it(`should reject a wrong message for ${preset} preset`, function() {
+      expect(validateMessageFromFile(wrongFixture[preset], { preset })).to.be.false;
+    });
+  }
 });
