@@ -33,11 +33,11 @@ const firstLineFromBuffer = function(buffer: Buffer): string {
   return buffer.toString().split('\n').shift();
 };
 
-const validateMessageFromFile = function(pathToFile: string) {
-  const buffer = fs.readFileSync(pathToFile);
+const validateMessageFromFile = function(file: string, options: Opts = {}) {
+  const buffer = fs.readFileSync(file);
   const message = firstLineFromBuffer(buffer);
 
-  return validateMessage(message);
+  return validateMessage(message, options);
 };
 
 export {
