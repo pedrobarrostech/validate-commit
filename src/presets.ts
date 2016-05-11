@@ -199,7 +199,6 @@ const presets: Presets = {
 
       const tag = match[1];
       const msg = match[2];
-      const gitMessage = match[3];
 
       if (tag === 'DOC' && VALID_CHANNELS.indexOf(msg) === -1) {
         log('Not a valid channel for DOC', 'error');
