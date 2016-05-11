@@ -163,6 +163,53 @@ const presets: Presets = {
       return true;
     },
     ignorePattern: /^WIP\:/
+  },
+  ember: {
+    validate(message) {
+      message = message.trim();
+
+      const TAGS: Array<string> = [
+        'DOC',
+        'FEATURE',
+        'BUGFIX',
+        'SECURITY'
+      ];
+      const TAG: string = `(${TAGS.join('|')})`;
+      const MESSAGE: string = '(.*)';
+      const GIT_MESSAGE: string = '(.*)';
+      const VALID_CHANNELS: Array<string> = [
+        'canary',
+        'beta',
+        'release'
+      ];
+
+      const PATTERN: RegExp = new RegExp(`^\\[${TAG} ${MESSAGE}\\] ${GIT_MESSAGE}`);
+
+      // match[1] = <tag>
+      // match[2] = <message>
+      // match[3] = <git-message>
+      const match = PATTERN.exec(message);
+
+      if (!match) {
+        log('Message does not match "[<tag> <message>] <git-message>"', 'error');
+        log(`Given: "${message}".`, 'info');
+
+        return false;
+      }
+
+      const tag = match[1];
+      const msg = match[2];
+      const gitMessage = match[3];
+
+      if (tag === 'DOC' && VALID_CHANNELS.indexOf(msg) === -1) {
+        log('Not a valid channel for DOC', 'error');
+        log(`Valid channels are ${VALID_CHANNELS.join(', ')}`);
+
+        return false;
+      }
+
+      return true;
+    }
   }
 };
 

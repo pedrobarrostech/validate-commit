@@ -122,5 +122,33 @@ describe('presets', function() {
       expect(validate('Fix: Ciao (fixes #22)')).to.be.true;
       expect(validate('Upgrade: Ciao (refs #87, fixes #22)')).to.be.true;
     });
-  })
+  });
+
+  describe('ember', function () {
+    var { validate } = presets['ember'];
+
+    it('should return false if the message is not in the correct format', function() {
+      expect(validate('(DOCS canary) Update docs')).to.be.false;
+      expect(validate('[FEATUR add a thing] Amazing new feature')).to.be.false;
+      expect(validate('[DOC notachannel] Update docs')).to.be.false;
+      expect(validate('[DOC beta]')).to.be.false;
+    });
+
+    it('should return true if the message is in the correct format', function() {
+      expect(validate('[DOC beta] Update CONTRIBUTING.md for commit prefixes')).to.be.true;
+      expect(validate('[FEATURE query-params-new] Message')).to.be.true;
+      expect(validate('[BUGFIX beta] Message')).to.be.true;
+      expect(validate('[SECURITY CVE-111-1111] Message')).to.be.true;
+    });
+
+    it('should handle multiline commits', function() {
+      const message = `
+        [DOC beta] Update CONTRIBUTING.md for commit prefixes
+
+        Fixes #3180
+      `;
+
+      expect(validate(message)).to.be.true;
+    });
+  });
 });
