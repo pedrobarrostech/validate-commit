@@ -1,21 +1,28 @@
-import gulp from 'gulp';
+/// <reference path="typings/main.d.ts" />
+/// <reference path="custom-typings/main.d.ts" />
+
+import * as gulp from 'gulp';
 import bump from 'gulp-bump';
 import git from 'gulp-git';
-import filter from 'gulp-filter';
+import * as filter from 'gulp-filter';
 import tag from 'gulp-tag-version';
 import changelog from 'gulp-conventional-changelog';
 
-import runSequence from 'run-sequence';
+import * as runSequence from 'run-sequence';
 
-var config = {
+interface Config {
+  importance: string;
+}
+
+var config: Config = {
   importance: 'patch'
 };
 
-function getImportance() {
+function getImportance(): string {
   return config.importance;
 }
 
-function release() {
+function release(): void {
   runSequence(
     'bump',
     'changelog',
@@ -72,4 +79,8 @@ gulp.task('release:major', function() {
   config.importance = 'major';
 
   return release();
+});
+
+gulp.task('default', function() {
+  console.log('working');
 });
