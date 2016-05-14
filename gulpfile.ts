@@ -4,11 +4,11 @@
 import * as gulp from 'gulp';
 import bump from 'gulp-bump';
 import git from 'gulp-git';
-import * as filter from 'gulp-filter';
+import filter from 'gulp-filter';
 import tag from 'gulp-tag-version';
 import changelog from 'gulp-conventional-changelog';
 
-import * as runSequence from 'run-sequence';
+import runSequence from 'run-sequence';
 
 interface Config {
   importance: string;
