@@ -41,7 +41,7 @@
     "lint": "tslint './src/**/*.ts'",
     "watch": "tsc --watch",
     "pretest": "npm run build",
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "CI='true' mocha --compilers js:babel-core/register",
     "test-watch": "npm test -- --watch",
     "prebuild": "npm run clean && npm run typings:install",
     "build": "tsc",
