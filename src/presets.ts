@@ -53,6 +53,9 @@ const presets: Presets = {
         revert: true
       };
 
+      // angular only cares about the first line
+      message = message.split('\n').shift();
+
       if (message.length >= MAX_LENGTH) {
         log(`Message is longer than ${MAX_LENGTH} characters!`, 'error');
 
@@ -104,6 +107,9 @@ const presets: Presets = {
         ':shirt:'
       ];
       const PATTERN: RegExp = new RegExp(`^(${EMOJIS.join('|')})(?:\ )(?:.*)$`);
+
+      // atom only cares about the first line
+      message = message.split('\n').shift();
 
       if (message.length > MAX_LENGTH) {
         log(`Message is longer than ${MAX_LENGTH} characters!`, 'error');
@@ -168,8 +174,6 @@ const presets: Presets = {
   },
   ember: {
     validate(message) {
-      message = message.trim();
-
       const TAGS: Array<string> = [
         'DOC',
         'FEATURE',
@@ -186,6 +190,9 @@ const presets: Presets = {
       ];
 
       const PATTERN: RegExp = new RegExp(`^\\[${TAG} ${MESSAGE}\\] ${GIT_MESSAGE}`);
+
+      // ember only cares about the first line
+      message = message.trim().split('\n').shift();
 
       // match[1] = <tag>
       // match[2] = <message>

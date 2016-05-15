@@ -8,6 +8,8 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
     return false;
   }
 
+  message = message.trim();
+
   options = (<any>Object).assign({
     preset: 'angular'
   }, options);
@@ -31,13 +33,13 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
   return validate(message);
 };
 
-const firstLineFromBuffer = function(buffer: Buffer): string {
-  return buffer.toString().split('\n').shift();
+const getMessageFromBuffer = function(buffer: Buffer): string {
+  return buffer.toString();
 };
 
 const validateMessageFromFile = function(file: string, options: Opts = {}) {
   const buffer = fs.readFileSync(file);
-  const message = firstLineFromBuffer(buffer);
+  const message = getMessageFromBuffer(buffer);
 
   return validateMessage(message, options);
 };
