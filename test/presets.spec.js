@@ -124,7 +124,7 @@ describe('presets', function() {
     });
   });
 
-  describe('ember', function () {
+  describe('ember', function() {
     var { validate } = presets['ember'];
 
     it('should return false if the message is not in the correct format', function() {
@@ -146,6 +146,37 @@ describe('presets', function() {
         [DOC beta] Update CONTRIBUTING.md for commit prefixes
 
         Fixes #3180
+      `;
+
+      expect(validate(message)).to.be.true;
+    });
+  });
+
+  describe('jquery', function() {
+    var { validate } = presets['jquery'];
+
+    it('should return false if the message is not in the correct format', function() {
+      var str = new Array(72 + 1).join('a');
+
+      expect(validate('[Component]: Short Description')).to.be.false;
+      expect(validate('Component Short Description')).to.be.false;
+      expect(validate('Component: Short Description.')).to.be.false;
+      expect(validate(`Component: Short Description ${str}`)).to.be.false;
+    });
+
+    it('should return true if the message is in the correct format', function() {
+      expect(validate('Component: Short Description')).to.be.true;
+    });
+
+    it('should handle multiline commits', function() {
+      const message = `
+        Component: Short Description
+
+        Optional Long Description
+
+        Fixes #xxx
+        Closes gh-yyy
+        Ref #zzz
       `;
 
       expect(validate(message)).to.be.true;

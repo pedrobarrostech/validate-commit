@@ -218,6 +218,36 @@ const presets: Presets = {
 
       return true;
     }
+  },
+  jquery: {
+    validate(message) {
+      const SUBJECT_MAX_LENGTH: number = 72;
+      const LONG_DESCRIPTION_MAX_LENGTH: number = 80;
+      const SUBJECT_PATTERN: RegExp = /^(\w*): ([\w\s\S]*[^.])$/;
+      const VALID_REFERENCES: Array<string> = [
+        'Fixes',
+        'Closes',
+        'Ref'
+      ];
+      const messageParts = message.trim().split('\n').map((line) => line.trim());
+
+      const subject = messageParts[0];
+      const match = SUBJECT_PATTERN.exec(subject);
+
+      if (subject.length > SUBJECT_MAX_LENGTH || !match) {
+        return false;
+      }
+
+      const isMessageLengthValid = messageParts.slice(1).every(function(part: string) {
+        return part.length < LONG_DESCRIPTION_MAX_LENGTH;
+      });
+
+      if (!isMessageLengthValid) {
+        return false;
+      }
+
+      return true;
+    }
   }
 };
 
