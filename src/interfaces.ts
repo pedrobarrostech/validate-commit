@@ -1,3 +1,5 @@
+export type Preset = 'angular' | 'atom' | 'eslint' | 'ember';
+
 export interface LogLevels {
   [severity: string]: {
     color: string;
@@ -12,5 +14,5 @@ export interface Presets {
 }
 
 export interface Opts {
-  preset?: string;
+  preset?: Preset;
 }
