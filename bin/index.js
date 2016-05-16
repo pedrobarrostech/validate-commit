@@ -12,7 +12,7 @@ program
   .version(pkg.version)
   .description(pkg.description)
   .command('validate-commit-msg <message>', 'validate a message')
-  .option('-p, --preset <preset>', 'specify a preset (angular|atom|eslint|ember) [angular]', 'angular')
+  .option('-p, --preset <preset>', 'specify a preset (angular|atom|eslint|ember|jquery) [angular]', 'angular')
   .action(function(message) {
     var valid = false;
     var options = {
