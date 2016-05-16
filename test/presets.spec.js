@@ -166,20 +166,42 @@ describe('presets', function() {
 
     it('should return true if the message is in the correct format', function() {
       expect(validate('Component: Short Description')).to.be.true;
+      expect(validate('Release: remove extraneous files from dist during release')).to.be.true;
+      expect(validate('Deferred: Give better stack diagnostics on exceptions')).to.be.true;
+      expect(validate('Release: update AUTHORS.txt')).to.be.true;
+      expect(validate('Event: Add touch event properties, eliminates need for a plugin')).to.be.true;
     });
 
     it('should handle multiline commits', function() {
       const message = `
-        Component: Short Description
+        Event: Add touch event properties, eliminates need for a plugin
 
-        Optional Long Description
+        Fixes gh-3104
+        Closes gh-3108
 
-        Fixes #xxx
-        Closes gh-yyy
-        Ref #zzz
+        See https://github.com/aarongloege/jquery.touchHooks
+
+        Other properties are already present thanks to mouse events.
+
+        squash! Add targetTouches
       `;
 
       expect(validate(message)).to.be.true;
+    });
+
+    it('should fail with invalid multiline commits', function() {
+      const message = `
+        Fixes gh-3104
+        Closes gh-3108
+
+        See https://github.com/aarongloege/jquery.touchHooks
+
+        Other properties are already present thanks to mouse events.
+
+        squash! Add targetTouches
+      `;
+
+      expect(validate(message)).to.be.false;
     });
   });
 });
