@@ -1,4 +1,4 @@
-# validate-commit
+# Validate Commit
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -6,7 +6,7 @@
 [![Dependency Status][depstat-image]][depstat-url]
 [![Downloads][download-badge]][npm-url]
 
-> Validate Angular style commit messages
+> Validate commit messages according to various presets
 
 ## Install
 
