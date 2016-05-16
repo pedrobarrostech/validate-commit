@@ -224,11 +224,7 @@ const presets: Presets = {
       const SUBJECT_MAX_LENGTH: number = 72;
       const LONG_DESCRIPTION_MAX_LENGTH: number = 80;
       const SUBJECT_PATTERN: RegExp = /^(\w*): ([\w\s\S]*[^.])$/;
-      const VALID_REFERENCES: Array<string> = [
-        'Fixes',
-        'Closes',
-        'Ref'
-      ];
+
       const messageParts = message.trim().split('\n').map((line) => line.trim());
 
       const subject = messageParts[0];
