@@ -1,4 +1,4 @@
-/// <reference path="typings/main.d.ts" />
+/// <reference path="typings/index.d.ts" />
 /// <reference path="custom-typings/main.d.ts" />
 
 import * as gulp from 'gulp';
@@ -79,8 +79,4 @@ gulp.task('release:major', function() {
   config.importance = 'major';
 
   return release();
-});
-
-gulp.task('default', function() {
-  console.log('working');
 });
