@@ -151,6 +151,9 @@ const presets: Presets = {
       //   (\\s\\((?:(?:(?:fixes|refs)\\s(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+))(?:,\\s(?!\\))|\\)))+)?
       // $/
 
+      // only care about the first line
+      message = message.split('\n').shift();
+
       const match = PATTERN.exec(message);
       if (!match) {
         log('Message does not match "Tag: Message (fixes #1234)".', 'error')
