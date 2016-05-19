@@ -10,6 +10,7 @@
     "lodash": "registry:npm/lodash#4.0.0+20160416211519"
   },
   "globalDevDependencies": {
+    "gulp-filter": "registry:dt/gulp-filter#3.0.1+20160316155526",
     "run-sequence": "registry:dt/run-sequence#0.0.0+20160316155526"
   }
 }

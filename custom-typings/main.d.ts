@@ -1,11 +1,5 @@
 /// <reference path="../typings/index.d.ts" />
 
-declare module 'gulp-filter' {
-  const filter: any;
-
-  export default filter;
-}
-
 declare module 'gulp-bump' {
   namespace bump {
     interface Options {
@@ -17,7 +11,7 @@ declare module 'gulp-bump' {
 
   function bump(options?: bump.Options): NodeJS.ReadWriteStream;
 
-  export default bump;
+  export = bump;
 }
 
 declare module 'gulp-git' {
