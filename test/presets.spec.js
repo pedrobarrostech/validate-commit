@@ -204,4 +204,82 @@ describe('presets', function() {
       expect(validate(message)).to.be.false;
     });
   });
+
+  describe('jshint', function() {
+    var {validate, ignorePattern} = presets['jshint'];
+
+    it('should ignore validation if the message starts with "[[WIP]]"', function() {
+      expect(ignorePattern.test('[[WIP]] hello world with some description')).to.be.true;
+    });
+
+    it('should validate a correct commit message preceded by "fixup!" prefix', function() {
+      expect(validate('fixup! [[FIX]] Message')).to.be.true;
+      expect(validate('fixup! [[FEAT]] Message')).to.be.true;
+    });
+
+    it('should return false if the title provided is not valid', function() {
+      expect(validate('[[INVALID]] Message')).to.be.false;
+      expect(validate('[[UNKNOWN]] Short descr')).to.be.false;
+    });
+
+    it('should return false if the description does not start with an uppercase character or a digit', function() {
+      expect(validate('[[FIX]] lowercase')).to.be.false;
+    });
+
+    it('should return false if the second line is not blank', function() {
+      const mex = `[[FIX]] Short description.
+      I'm not blank.
+      `
+      expect(validate(mex)).to.be.false;
+    });
+
+    it('should validate correct multiline commit messages', function() {
+      const mex = `[[CHORE]] Something.
+
+      This commit bla bla bla.
+      However bla bla bla.
+
+      Closes #2
+      `
+      expect(validate(mex)).to.be.true;
+    });
+
+    it('should return false if it is not in the correct format', function() {
+      // Lowercase but valid tag
+      expect(validate('[[fix]] Message')).to.be.false;
+      expect(validate('[[chore]] Message')).to.be.false;
+
+      // Message containing a reference to a github issue
+      expect(validate('[[FEAT]] Close user/repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close user/my.repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close my-user/my-repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close my-user/my.repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close my_user/my_repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close my_user/my.repo#22')).to.be.false;
+      expect(validate('[[FEAT]] Close #22')).to.be.false;
+      expect(validate('[[FEAT]] Close gh-22')).to.be.false;
+      expect(validate('[[FEAT]] Close GH-22')).to.be.false;
+
+      // Space missing before description
+      expect(validate('[[FEAT]]Ciao')).to.be.false;
+    });
+
+    it('should return false if header is too long', function() {
+      expect(validate(
+        '[[FIX]] Very long description that it should be short and contain a maximum sixty characters.'
+      )).to.be.false;
+    });
+
+    it('should return false if body lines are not wrapped at 100 columns', function() {
+      const mex = `[[DOCS]] Github pages
+
+      Deploy
+      Deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy
+      Deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy deploy
+
+      Closes #3
+      `
+      expect(validate(mex)).to.be.false;
+    })
+  });
 });
