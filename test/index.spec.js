@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import 'mocha-sinon';
 
 import { validateMessage, validateMessageFromFile } from '../dist';
 import presets from '../dist/presets';
@@ -44,4 +45,31 @@ describe('#validateMessageFromFile', function() {
       expect(validateMessageFromFile(wrongFixture[preset], { preset })).to.be.false;
     });
   }
+});
+
+describe('#logging', function() {
+  beforeEach(function() {
+    // Some mocha reporters use console.log as well, so the tests that stub it may not yield any output
+    // Workaround
+    var log = console.log;
+    this.sinon.stub(console, 'log', function() {
+      return log.apply(log, arguments);
+    });
+  });
+
+  afterEach(function () {
+    this.sinon.restore();
+  });
+
+  it('should not work when CI env variable is true (the default of the testing environment)', function() {
+    validateMessage('invalid message');
+    expect(console.log.calledOnce).to.be.false;
+  });
+
+  it('should work when CI env variable is missing', function() {
+    delete process.env.CI;
+    validateMessage('invalid message');
+    expect(console.log.calledOnce).to.be.true;
+    process.env.CI = true;
+  });
 });

@@ -210,7 +210,7 @@ describe('presets', function() {
         squash! Add targetTouches
       `;
 
-      // expect(validate(message1)).to.be.false;
+      expect(validate(message1)).to.be.false;
       expect(validate(message2)).to.be.false;
     });
   });
