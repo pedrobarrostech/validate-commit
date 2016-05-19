@@ -233,7 +233,16 @@ const presets: Presets = {
       const subject = messageParts[0];
       const match = SUBJECT_PATTERN.exec(subject);
 
-      if (subject.length > SUBJECT_MAX_LENGTH || !match) {
+      if (subject.length > SUBJECT_MAX_LENGTH) {
+        log(`Subject is longer than ${SUBJECT_MAX_LENGTH} characters.`, 'error');
+
+        return false;
+      }
+
+      if (!match) {
+        log('Subject does not match "Component: Short Description".', 'error')
+        log(`Given: "${subject}".`, 'info');
+
         return false;
       }
 
@@ -242,6 +251,8 @@ const presets: Presets = {
       });
 
       if (!isMessageLengthValid) {
+        log(`Line lengths (except the subject one) should be wrapped at ${LONG_DESCRIPTION_MAX_LENGTH} columns.`, 'error');
+
         return false;
       }
 

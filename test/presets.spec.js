@@ -190,7 +190,7 @@ describe('presets', function() {
     });
 
     it('should fail with invalid multiline commits', function() {
-      const message = `
+      const message1 = `
         Fixes gh-3104
         Closes gh-3108
 
@@ -200,8 +200,18 @@ describe('presets', function() {
 
         squash! Add targetTouches
       `;
+      const message2 = `Component: Short Description
+        Closes gh-3108
 
-      expect(validate(message)).to.be.false;
+        See https://github.com/aarongloege/jquery.touchHooks
+
+        ${new Array(80 + 1).join('A')}
+
+        squash! Add targetTouches
+      `;
+
+      // expect(validate(message1)).to.be.false;
+      expect(validate(message2)).to.be.false;
     });
   });
 
