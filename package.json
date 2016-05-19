@@ -4,6 +4,9 @@
   "description": "Validate commit messages according to various presets",
   "main": "dist/index.js",
   "author": "Will Soto <will.soto9+github@gmail.com>",
+  "contributors": [
+    "Leonardo Di Donato <leodidonato@gmail.com> (http://git.io/leodido)"
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/paradox41/validate-commit/issues"
