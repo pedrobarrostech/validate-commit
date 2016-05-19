@@ -8,5 +8,8 @@
     "chalk": "registry:npm/chalk#1.0.0+20160211003958",
     "gulp": "registry:npm/gulp#3.8.0+20160211003958",
     "lodash": "registry:npm/lodash#4.0.0+20160416211519"
+  },
+  "globalDevDependencies": {
+    "run-sequence": "registry:dt/run-sequence#0.0.0+20160316155526"
   }
 }

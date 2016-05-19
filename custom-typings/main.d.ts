@@ -6,12 +6,6 @@ declare module 'gulp-filter' {
   export default filter;
 }
 
-declare module 'run-sequence' {
-  function runSequence(...tasks: string[]): NodeJS.ReadWriteStream;
-
-  export default runSequence;
-}
-
 declare module 'gulp-bump' {
   namespace bump {
     interface Options {

@@ -8,7 +8,7 @@ import filter from 'gulp-filter';
 import tag from 'gulp-tag-version';
 import changelog from 'gulp-conventional-changelog';
 
-import runSequence from 'run-sequence';
+import * as runSequence from 'run-sequence';
 
 interface Config {
   importance: string;
