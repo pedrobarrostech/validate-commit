@@ -62,7 +62,7 @@ describe('#logging', function() {
   });
 
   it('should not work when CI env variable is true (the default of the testing environment)', function() {
-    validateMessage('test(validate-commit): no env variable');
+    validateMessage('invalid message');
     expect(console.log.calledOnce).to.be.false;
   });
 
