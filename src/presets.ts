@@ -228,7 +228,7 @@ const presets: Presets = {
       const LONG_DESCRIPTION_MAX_LENGTH: number = 80;
       const SUBJECT_PATTERN: RegExp = /^(\w*): ([\w\s\S]*[^.])$/;
 
-      const messageParts = message.trim().split('\n').map((line) => line.trim());
+      const messageParts = message.trim().split('\n').map(line => line.trim());
 
       const subject = messageParts[0];
       const match = SUBJECT_PATTERN.exec(subject);
@@ -247,6 +247,70 @@ const presets: Presets = {
 
       return true;
     }
+  },
+  jshint: {
+    validate(message) {
+      const HEADER_LENGTH: number = 60;
+      const LINES_LENGTH: number = 100;
+
+      // A github issue reference - e.g., #1234, GH-1, gh-1, user/repo#1234
+      const GH = '(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+)';
+      // Any string starting with an uppercase character or a digit and not referencing a github issue
+      const SHORTDESCR = `((?=[A-Z0-9])(?:(?!${GH}).)*)`;
+      // [[TYPE]] part
+      const TITLE = '\\[{2}([A-Z]+)\\]{2}';
+      // Fixup pattern (optional)
+      const FIXUP = '(?:fixup!\\s*)?';
+      const HEADER_PATTERN: RegExp = new RegExp(`^${FIXUP}${TITLE}\\s${SHORTDESCR}$`);
+
+      const lines = message.trim().split('\n').map(line => line.trim());
+
+      const header = lines.shift();
+      if (header.length > HEADER_LENGTH) {
+        log(`Header is longer than ${HEADER_LENGTH} characters.`, 'error');
+
+        return false;
+      }
+
+      const match = HEADER_PATTERN.exec(header);
+      if (!match) {
+        log('Header does not match "[[TYPE]] Short description".', 'error')
+        log(`Given: "${header}".`, 'info');
+
+        return false;
+      }
+
+      // Is input title ok?
+      const TITLES: Array<string> = ['FIX', 'FEAT', 'DOCS', 'TEST', 'CHORE'];
+      if (TITLES.indexOf(match[1]) === -1) {
+        log(`The word "${match[1]}" is not an allowed title.`, 'error');
+        log(`Valid titles are: ${TITLES.join(', ')}.`, 'info');
+
+        return false;
+      }
+
+      // Early exit for one line commit messages
+      if (lines.length === 0) {
+        return true;
+      }
+
+      // Is second line a blank one?
+      const blankln: string = lines.shift();
+      if (blankln.length !== 0) {
+        log('Second line of commit message must be a blank line.', 'error');
+
+        return false;
+      }
+
+      if (!lines.every(line => line.length <= LINES_LENGTH)) {
+        log(`Line lengths (except first) should be wrapped at ${LINES_LENGTH} columns.`, 'error');
+
+        return false;
+      }
+
+      return true;
+    },
+    ignorePattern: /^\[{2}WIP\]{2}/
   }
 };
 
