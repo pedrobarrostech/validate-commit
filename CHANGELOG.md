@@ -1,3 +1,26 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/paradox41/validate-commit/compare/v2.1.1...v2.2.0) (2016-05-19)
+
+
+### Bug Fixes
+
+* **gulp:** add gulp-filter typings ([a14813a](https://github.com/paradox41/validate-commit/commit/a14813a))
+* **gulp:** add run-sequence typings ([568a911](https://github.com/paradox41/validate-commit/commit/568a911))
+* **gulp:** fix up gulpfile and custom typings ([d9f0310](https://github.com/paradox41/validate-commit/commit/d9f0310))
+* **validate-commit:** do not logs when CI env variable is true also if commit message is wrong ([89ae84c](https://github.com/paradox41/validate-commit/commit/89ae84c))
+* **validate-commit:** jquery preset logging capabilities ([4d1d5e1](https://github.com/paradox41/validate-commit/commit/4d1d5e1))
+
+
+### Features
+
+* **cli:** add eslint and ember to possible presets ([4ea60f0](https://github.com/paradox41/validate-commit/commit/4ea60f0)), closes [#7](https://github.com/paradox41/validate-commit/issues/7)
+* **cli:** add jquery to cli ([29f8b59](https://github.com/paradox41/validate-commit/commit/29f8b59))
+* **interfaces:** add Preset type ([d3e4886](https://github.com/paradox41/validate-commit/commit/d3e4886))
+* **presets:** add ember preset ([c66a71c](https://github.com/paradox41/validate-commit/commit/c66a71c))
+* **presets:** jshint preset ([3e7b02b](https://github.com/paradox41/validate-commit/commit/3e7b02b))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/paradox41/validate-commit/compare/v2.1.0...v2.1.1) (2016-05-03)
 
