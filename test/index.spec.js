@@ -10,10 +10,6 @@ describe('#validateMessage', function() {
     expect(validateMessage('')).to.be.false;
   });
 
-  it('should omit validation if ignore pattern is provided', function() {
-    expect(validateMessage('WIP: ignore me')).to.be.true;
-  });
-
   it('should throw an error if no valid preset is provided', function() {
     const f = function() {
       validateMessage('chore(package): foo', {
@@ -22,6 +18,28 @@ describe('#validateMessage', function() {
     };
 
     expect(f).to.throw(Error);
+  });
+
+  describe('#ignorePattern', function() {
+    beforeEach(function() {
+      this.sinon.stub(console, 'warn');
+    });
+
+    afterEach(function() {
+      this.sinon.restore();
+    });
+
+    it('should omit validation if ignore pattern is provided', function() {
+      expect(validateMessage('WIP: ignore me')).to.be.true;
+    });
+
+    it('should warn that validation has been ignored when CI env variable is missing and ignore pattern is used', function() {
+      delete process.env.CI;
+      validateMessage('WIP: work in progress');
+      expect(console.warn.calledOnce).to.be.true;
+      expect(console.warn.calledWith('Commit message validation ignored.')).to.be.true;
+      process.env.CI = true;
+    });
   });
 });
 
@@ -45,6 +63,11 @@ describe('#validateMessageFromFile', function() {
       expect(validateMessageFromFile(wrongFixture[preset], { preset })).to.be.false;
     });
   }
+
+  it('should use the default preset', function() {
+    const defaultPreset = 'angular';
+    expect(validateMessageFromFile(`${__dirname}/fixtures/${defaultPreset}/wrong.txt`)).to.be.false;
+  });
 });
 
 describe('#logging', function() {
