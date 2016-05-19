@@ -3,10 +3,10 @@
 
 import * as gulp from 'gulp';
 import * as bump from 'gulp-bump';
-import git from 'gulp-git';
+import * as git from 'gulp-git';
 import * as filter from 'gulp-filter';
-import tag from 'gulp-tag-version';
-import changelog from 'gulp-conventional-changelog';
+import * as tag from 'gulp-tag-version';
+import * as changelog from 'gulp-conventional-changelog';
 
 import * as runSequence from 'run-sequence';
 

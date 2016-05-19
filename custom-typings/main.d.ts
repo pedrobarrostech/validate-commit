@@ -154,7 +154,7 @@ declare module 'gulp-git' {
     function clean(paths?: string, opts?: CleanOpts | Callback, cb?: Callback): NodeJS.ReadWriteStream;
   }
 
-  export default git;
+  export = git;
 }
 
 declare module 'gulp-tag-version' {
@@ -169,7 +169,7 @@ declare module 'gulp-tag-version' {
 
   function tag(opts?: tag.Opts): NodeJS.ReadWriteStream;
 
-  export default tag;
+  export = tag;
 }
 
 declare module 'gulp-conventional-changelog' {
@@ -220,12 +220,12 @@ declare module 'gulp-conventional-changelog' {
     }
   }
 
-  function conventionalChangelog(
+  function changelog(
     options?: changelog.Opts,
     context?: changelog.Context,
     gitRawCommitsOpts?: changelog.GitRawCommitsOpts,
     parserOpts?: changelog.ParserOpts,
     writerOpts?: changelog.WriterOpts): NodeJS.ReadWriteStream;
 
-  export default conventionalChangelog;
+  export = changelog;
 }
