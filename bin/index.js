@@ -8,6 +8,7 @@ var pkg = require('../package.json');
 var validateMessage = require('../dist').validateMessage;
 var validateMessageFromFile = require('../dist').validateMessageFromFile;
 
+program._name = 'validate-commit-msg';
 program
   .version(pkg.version)
   .description(pkg.description)
