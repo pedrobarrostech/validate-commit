@@ -24,8 +24,15 @@
     "node",
     "git",
     "angular",
+    "atom",
+    "ember",
+    "eslint",
+    "jshint",
+    "jquery",
+    "hooks",
     "commit",
-    "conventional commit"
+    "conventional commit",
+    "commit convention"
   ],
   "bin": {
     "validate-commit-msg": "./bin/index.js"
@@ -44,7 +51,7 @@
     "lint": "tslint './src/**/*.ts'",
     "watch": "tsc --watch",
     "pretest": "npm run build",
-    "test": "CI='true' mocha --compilers js:babel-core/register",
+    "test": "SILENT='true' mocha --compilers js:babel-core/register",
     "test-watch": "npm test -- --watch",
     "prebuild": "npm run clean && npm run typings:install",
     "build": "tsc",

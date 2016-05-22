@@ -8,28 +8,36 @@
 
 > Validate commit messages according to various presets
 
+![example](./example.gif)
+
 ## Install
 
 ```sh
-npm i validate-commit --save-dev
+npm install validate-commit --save-dev
 ```
 
-## Description
+## Features
 
-Even though there are a couple of other packages that do this, I wanted to release this one with a few quality of life changes.
+Even though there are a couple of other packages that do this, this one has a few quality of life changes.
 
-- Uses [Chalk](https://www.npmjs.com/package/chalk) to color messages
-- Outputs all the scopes when the scope is incorrect
-
-## Example
-
-![example](./example.gif)
+- **Lets you decide how to validate** the commit messages (see [here](#usage))
+- It validate commit files coming from both strings and files
+- Supports the following **presets**:
+  + [angular](./conventions/angular.md)
+  + [atom](./conventions/atom.md)
+  + [eslint](./conventions/eslint.md)
+  + [ember](./conventions/ember.md)
+  + [jquery](./conventions/jquery.md)
+  + [jshint](./conventions/jshint.md)
+- Supports **ignore patterns**
+- Uses [chalk][chalk-url] module to color messages
+- Logging can be muted via **SILENT** environment variable
 
 ## Usage
 
-### Git Hook
+### With git hooks
 
-Using [git-scripts](https://www.npmjs.com/package/git-scripts)
+E.g., using [git-scripts][git-scripts-url].
 
 ```json
 "git": {
@@ -39,18 +47,81 @@ Using [git-scripts](https://www.npmjs.com/package/git-scripts)
 }
 ```
 
-### CLI
+### From CLI
 
 ```bash
 $ validate-commit-msg 'chore(package): some message'
+$ validate-commit-msg -p eslint 'New: Awesome feature'
+$ validate-commit-msg -p ember '[DOC beta] Update CONTRIBUTING.md'
+$ validate-commit-msg -p jshint '[[DOCS]] Awesome JS docs'
+$ ...
 ```
 
-### Module
+When a wrong commit message is given it outputs an explaination.
 
-```js
-var validateCommit = require('validate-commit');
+```bash
+$ validate-commit-msg 'unknown(something): wrong'
+# 'unknown' is not an allowed type!
+# Valid types are: feat, fix, docs, style, refactor, perf, test, chore, revert
+```
 
-validateCommit('chore(package): some message'); // true
+However you can mute it:
+
+```bash
+$ validate-commit-msg -s 'unknown(something): wrong'
+```
+
+### Within node
+
+```javascript
+var validateCommit = require('validate-commit').validateMessage;
+validateCommit('chore(package): some message'); // > true
+validateCommit('New: Awesome', { preset: 'eslint' }); // > true
+validateCommit('Unk: Awesome', { preset: 'eslint' }); // > false
+// > The word "Unk" is not an allowed tag.
+// > Valid types are: Fix, Update, Breaking, Docs, Build, New, Upgrade.
+process.env.SILENT = true;
+validateCommit('Unk: Awesome', { preset: 'eslint' }); // > false
+```
+
+
+## API
+
+### JavaScript
+
+```
+validateMessage(message: string, ?options: object)
+```
+
+```
+validateMessageFromFile(file: string, ?options: object)
+```
+
+### CLI
+
+This module, like many others, installs an executable in **./node_modules/.bin**.
+
+```bash
+~./node_modules/.bin$ ./validate-commit-msg
+```
+
+```
+  Usage: validate-commit-msg [options] [command]
+
+
+  Commands:
+
+    validate-commit-msg <message>  validate a message
+    help [cmd]                     display help for [cmd]
+
+  Validate commit messages according to various presets
+
+  Options:
+
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -p, --preset <preset>  specify a preset (angular|atom|eslint|ember|jquery|jshint) [angular]
+    -s, --silent           mute log messages [false]
 ```
 
 ### Development
@@ -74,3 +145,6 @@ Apache-2.0 © [Will Soto](http://github.com/paradox41)
 [depstat-image]: https://david-dm.org/paradox41/validate-commit.svg?style=flat-square
 
 [download-badge]: http://img.shields.io/npm/dm/validate-commit.svg?style=flat-square
+
+[chalk-url]: https://www.npmjs.com/package/chalk
+[git-scripts-url]: https://www.npmjs.com/package/git-scripts

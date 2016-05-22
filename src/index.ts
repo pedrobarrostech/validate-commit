@@ -23,7 +23,7 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
   const {validate, ignorePattern} = preset;
 
   if (ignorePattern && ignorePattern.test(message)) {
-    if (!process.env.CI) {
+    if (process.env.SILENT === 'true' || !process.env.SILENT) {
       console.warn('Commit message validation ignored.');
     }
 
