@@ -31,7 +31,7 @@ Even though there are a couple of other packages that do this, this one has a fe
   + [jshint](./conventions/jshint.md)
 - Supports **ignore patterns**
 - Uses [chalk][chalk-url] module to color messages
-- Logging can be disabled via environment variable
+- Logging can be muted via **SILENT** environment variable
 
 ## Usage
 
@@ -51,14 +51,39 @@ E.g., using [git-scripts][git-scripts-url].
 
 ```bash
 $ validate-commit-msg 'chore(package): some message'
+$ validate-commit-msg -p eslint 'New: Awesome feature'
+$ validate-commit-msg -p ember '[DOC beta] Update CONTRIBUTING.md'
+$ validate-commit-msg -p jshint '[[DOCS]] Awesome JS docs'
+$ ...
+```
+
+When a wrong commit message is given it outputs an explaination.
+
+```bash
+$ validate-commit-msg 'unknown(something): wrong'
+# 'unknown' is not an allowed type!
+# Valid types are: feat, fix, docs, style, refactor, perf, test, chore, revert
+```
+
+However you can mute it:
+
+```bash
+$ validate-commit-msg -s 'unknown(something): wrong'
 ```
 
 ### Within node
 
 ```javascript
 var validateCommit = require('validate-commit').validateMessage;
-validateCommit('chore(package): some message'); // true
+validateCommit('chore(package): some message'); // > true
+validateCommit('New: Awesome', { preset: 'eslint' }); // > true
+validateCommit('Unk: Awesome', { preset: 'eslint' }); // > false
+// > The word "Unk" is not an allowed tag.
+// > Valid types are: Fix, Update, Breaking, Docs, Build, New, Upgrade.
+process.env.SILENT = true;
+validateCommit('Unk: Awesome', { preset: 'eslint' }); // > false
 ```
+
 
 ## API
 
@@ -96,6 +121,7 @@ This module, like many others, installs an executable in **./node_modules/.bin**
     -h, --help             output usage information
     -V, --version          output the version number
     -p, --preset <preset>  specify a preset (angular|atom|eslint|ember|jquery|jshint) [angular]
+    -s, --silent           mute log messages [false]
 ```
 
 ### Development
