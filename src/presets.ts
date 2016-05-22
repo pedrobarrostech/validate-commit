@@ -22,7 +22,7 @@ type Severity = 'error' | 'warn' | 'info' | 'debug';
 const log = function(message: string, severity: Severity = 'info'): void {
   const color: string = LOG_LEVELS[severity].color || 'cyan';
 
-  if (!process.env.CI) {
+  if (process.env.SILENT !== 'true') {
     console.log((<any>chalk)[color](message));
   }
 };
@@ -156,12 +156,12 @@ const presets: Presets = {
 
       const match = PATTERN.exec(message);
       if (!match) {
-        log('Message does not match "Tag: Message (fixes #1234)".', 'error')
+        log('Message does not match "Tag: Message (fixes #1234)".', 'error');
         log(`Given: "${message}".`, 'info');
 
         return false;
       }
-      const matches: Array<string> = match.filter(str => str ? true : false).map(str => str.trim())
+      const matches: Array<string> = match.filter(str => str ? true : false).map(str => str.trim());
       // Is input tag ok?
       const TAGS: Array<string> = ['Fix', 'Update', 'Breaking', 'Docs', 'Build', 'New', 'Upgrade'];
       if (TAGS.indexOf(matches[1]) === -1) {
@@ -240,7 +240,7 @@ const presets: Presets = {
       }
 
       if (!match) {
-        log('Subject does not match "Component: Short Description".', 'error')
+        log('Subject does not match "Component: Short Description".', 'error');
         log(`Given: "${subject}".`, 'info');
 
         return false;
@@ -285,7 +285,7 @@ const presets: Presets = {
 
       const match = HEADER_PATTERN.exec(header);
       if (!match) {
-        log('Header does not match "[[TYPE]] Short description".', 'error')
+        log('Header does not match "[[TYPE]] Short description".', 'error');
         log(`Given: "${header}".`, 'info');
 
         return false;

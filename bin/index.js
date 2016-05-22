@@ -14,11 +14,16 @@ program
   .description(pkg.description)
   .command('validate-commit-msg <message>', 'validate a message')
   .option('-p, --preset <preset>', 'specify a preset (angular|atom|eslint|ember|jquery|jshint) [angular]', 'angular')
+  .option('-s, --silent', 'mute log messages [false]', false)
   .action(function(message) {
     var valid = false;
     var options = {
       preset: program.preset
     };
+
+    if (program.silent) {
+      process.env.SILENT = true;
+    }
 
     if (isFile(message)) {
       valid = validateMessageFromFile(message, options);

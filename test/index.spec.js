@@ -33,12 +33,12 @@ describe('#validateMessage', function() {
       expect(validateMessage('WIP: ignore me')).to.be.true;
     });
 
-    it('should warn that validation has been ignored when CI env variable is missing and ignore pattern is used', function() {
-      delete process.env.CI;
+    it('should warn that validation has been ignored when SILENT env variable is missing and ignore pattern is used', function() {
+      delete process.env.SILENT;
       validateMessage('WIP: work in progress');
       expect(console.warn.calledOnce).to.be.true;
       expect(console.warn.calledWith('Commit message validation ignored.')).to.be.true;
-      process.env.CI = true;
+      process.env.SILENT = true;
     });
   });
 });
@@ -84,15 +84,52 @@ describe('#logging', function() {
     this.sinon.restore();
   });
 
-  it('should not work when CI env variable is true (the default of the testing environment)', function() {
-    validateMessage('invalid message');
-    expect(console.log.calledOnce).to.be.false;
+  describe('(SILENT ON)', function() {
+    it('should not work when SILENT env variable is true (the default of the testing environment)', function() {
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.false;
+    });
+
+    it('should not work when SILENT env variable is true (boolean)', function() {
+      process.env.SILENT = true;
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.false;
+    });
+
+    it('should not work when SILENT env variable is true (string)', function() {
+      process.env.SILENT = 'true';
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.false;
+    });
   });
 
-  it('should work when CI env variable is missing', function() {
-    delete process.env.CI;
-    validateMessage('invalid message');
-    expect(console.log.calledOnce).to.be.true;
-    process.env.CI = true;
+  describe('(SILENT OFF)', function() {
+    it('should work when SILENT env variable is missing', function() {
+      delete process.env.SILENT;
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.true;
+      process.env.SILENT = 'true';
+    });
+
+    it('SILENT env variable false (string)', function() {
+      process.env.SILENT = 'false';
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.true;
+      process.env.SILENT = 'true';
+    });
+
+    it('SILENT env variable false (boolean)', function() {
+      process.env.SILENT = false;
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.true;
+      process.env.SILENT = 'true';
+    });
+
+    it('SILENT env variable any string (string)', function() {
+      process.env.SILENT = 'ciaociao';
+      validateMessage('invalid message');
+      expect(console.log.calledOnce).to.be.true;
+      process.env.SILENT = 'true';
+    });
   });
 });
