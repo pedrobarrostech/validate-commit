@@ -74,35 +74,87 @@
 				<blockquote>
 					<p>Validate commit messages according to various presets</p>
 				</blockquote>
-				<h2 id="install">Install</h2>
-				<pre><code class="lang-sh">npm i validate-commit --save-dev
-</code></pre>
-				<h2 id="description">Description</h2>
-				<p>Even though there are a couple of other packages that do this, I wanted to release this one with a few quality of life changes.</p>
-				<ul>
-					<li>Uses <a href="https://www.npmjs.com/package/chalk">Chalk</a> to color messages</li>
-					<li>Outputs all the scopes when the scope is incorrect</li>
-				</ul>
-				<h2 id="example">Example</h2>
 				<p><img src="./example.gif" alt="example"></p>
+				<h2 id="install">Install</h2>
+				<pre><code class="lang-sh">npm install validate-commit --save-dev
+</code></pre>
+				<h2 id="features">Features</h2>
+				<p>Even though there are a couple of other packages that do this, this one has a few quality of life changes.</p>
+				<ul>
+					<li><strong>Lets you decide how to validate</strong> the commit messages (see <a href="#usage">here</a>)</li>
+					<li>It validate commit files coming from both strings and files</li>
+					<li>Supports the following <strong>presets</strong>:<ul>
+							<li><a href="./conventions/angular.md">angular</a></li>
+							<li><a href="./conventions/atom.md">atom</a></li>
+							<li><a href="./conventions/eslint.md">eslint</a></li>
+							<li><a href="./conventions/ember.md">ember</a></li>
+							<li><a href="./conventions/jquery.md">jquery</a></li>
+							<li><a href="./conventions/jshint.md">jshint</a></li>
+						</ul>
+					</li>
+					<li>Supports <strong>ignore patterns</strong></li>
+					<li>Uses <a href="https://www.npmjs.com/package/chalk">chalk</a> module to color messages</li>
+					<li>Logging can be muted via <strong>SILENT</strong> environment variable</li>
+				</ul>
 				<h2 id="usage">Usage</h2>
-				<h3 id="git-hook">Git Hook</h3>
-				<p>Using <a href="https://www.npmjs.com/package/git-scripts">git-scripts</a></p>
+				<h3 id="with-git-hooks">With git hooks</h3>
+				<p>E.g., using <a href="https://www.npmjs.com/package/git-scripts">git-scripts</a>.</p>
 				<pre><code class="lang-json">&quot;git&quot;: {
     &quot;scripts&quot;: {
         &quot;commit-msg&quot;: &quot;./node_modules/.bin/validate-commit-msg $1&quot;
     }
 }
 </code></pre>
-				<h3 id="cli">CLI</h3>
+				<h3 id="from-cli">From CLI</h3>
 				<pre><code class="lang-bash">$ validate-commit-msg <span class="hljs-string">'chore(package): some message'</span>
+$ validate-commit-msg -p eslint <span class="hljs-string">'New: Awesome feature'</span>
+$ validate-commit-msg -p ember <span class="hljs-string">'[DOC beta] Update CONTRIBUTING.md'</span>
+$ validate-commit-msg -p jshint <span class="hljs-string">'[[DOCS]] Awesome JS docs'</span>
+$ ...
 </code></pre>
-				<h3 id="module">Module</h3>
-				<pre><code class="lang-js"><span class="hljs-keyword">var</span> validateCommit = <span class="hljs-built_in">require</span>(<span class="hljs-string">'validate-commit'</span>);
+				<p>When a wrong commit message is given it outputs an explaination.</p>
+				<pre><code class="lang-bash">$ validate-commit-msg <span class="hljs-string">'unknown(something): wrong'</span>
+<span class="hljs-comment"># 'unknown' is not an allowed type!</span>
+<span class="hljs-comment"># Valid types are: feat, fix, docs, style, refactor, perf, test, chore, revert</span>
+</code></pre>
+				<p>However you can mute it:</p>
+				<pre><code class="lang-bash">$ validate-commit-msg <span class="hljs-_">-s</span> <span class="hljs-string">'unknown(something): wrong'</span>
+</code></pre>
+				<h3 id="within-node">Within node</h3>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> validateCommit = <span class="hljs-built_in">require</span>(<span class="hljs-string">'validate-commit'</span>).validateMessage;
+validateCommit(<span class="hljs-string">'chore(package): some message'</span>); <span class="hljs-comment">// &gt; true</span>
+validateCommit(<span class="hljs-string">'New: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; true</span>
+validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
+<span class="hljs-comment">// &gt; The word "Unk" is not an allowed tag.</span>
+<span class="hljs-comment">// &gt; Valid types are: Fix, Update, Breaking, Docs, Build, New, Upgrade.</span>
+process.env.SILENT = <span class="hljs-literal">true</span>;
+validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
+</code></pre>
+				<h2 id="api">API</h2>
+				<h3 id="javascript">JavaScript</h3>
+				<pre><code>validateMessage(<span class="hljs-keyword">message</span>: <span class="hljs-keyword">string</span>, ?options: <span class="hljs-keyword">object</span>)
+</code></pre><pre><code>validateMessageFromFile(<span class="hljs-keyword">file</span>: <span class="hljs-keyword">string</span>, ?options: <span class="hljs-keyword">object</span>)
+</code></pre><h3 id="cli">CLI</h3>
+				<p>This module, like many others, installs an executable in <strong>./node_modules/.bin</strong>.</p>
+				<pre><code class="lang-bash">~./node_modules/.bin$ ./validate-commit-msg
+</code></pre>
+				<pre><code>  <span class="hljs-attribute">Usage</span>: validate-commit-msg [options] [command]
 
-validateCommit(<span class="hljs-string">'chore(package): some message'</span>); <span class="hljs-comment">// true</span>
-</code></pre>
-				<h3 id="development">Development</h3>
+<span class="vim">
+  Command<span class="hljs-variable">s:</span>
+
+    validate-commit-msg <span class="hljs-symbol">&lt;message&gt;</span>  validate <span class="hljs-keyword">a</span> message
+    <span class="hljs-keyword">help</span> [cmd]                     <span class="hljs-keyword">display</span> <span class="hljs-keyword">help</span> <span class="hljs-keyword">for</span> [cmd]
+
+  Validate commit <span class="hljs-keyword">messages</span> according <span class="hljs-keyword">to</span> various presets
+
+  Option<span class="hljs-variable">s:</span>
+
+    -h, --<span class="hljs-keyword">help</span>             output usage information
+    -V, --<span class="hljs-keyword">version</span>          output the <span class="hljs-keyword">version</span> <span class="hljs-keyword">number</span>
+    -<span class="hljs-keyword">p</span>, --preset <span class="hljs-symbol">&lt;preset&gt;</span>  specify <span class="hljs-keyword">a</span> preset (angular|atom|eslint|ember|jquery|jshint) [angular]
+    -s, --<span class="hljs-keyword">silent</span>           mute <span class="hljs-built_in">log</span> <span class="hljs-keyword">messages</span> [false]</span>
+</code></pre><h3 id="development">Development</h3>
 				<p><code>npm i &amp;&amp; typings install</code></p>
 				<h2 id="license">License</h2>
 				<p>Apache-2.0 © <a href="http://github.com/paradox41">Will Soto</a></p>
