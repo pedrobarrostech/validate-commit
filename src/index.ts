@@ -3,6 +3,12 @@ import * as fs from 'fs';
 import { Opts } from './interfaces';
 import presets from './presets';
 
+/**
+ * Validate a commit message according to preset
+ * @param  {string} message The commit message
+ * @param  {object} options
+ * @return {boolean} Whether or not the message was valid
+ */
 const validateMessage = function(message: string, options: Opts = {}): boolean {
   if (!message) {
     return false;
@@ -33,10 +39,22 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
   return validate(message);
 };
 
+/**
+ * @private
+ * Convert a buffer to a string
+ * @param  {Buffer} buffer
+ * @return {string}
+ */
 const getMessageFromBuffer = function(buffer: Buffer): string {
   return buffer.toString();
 };
 
+/**
+ * Validate a commit message from a file - e.g., for a pre-commit hook
+ * @param {string} file The file to be read in
+ * @param {object} options
+ * @return {boolean}
+ */
 const validateMessageFromFile = function(file: string, options: Opts = {}) {
   const buffer = fs.readFileSync(file);
   const message = getMessageFromBuffer(buffer);
