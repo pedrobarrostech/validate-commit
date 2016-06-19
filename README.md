@@ -8,7 +8,7 @@
 
 > Validate commit messages according to various presets
 
-![example](./example.gif)
+[![asciicast](https://asciinema.org/a/49433.png)](https://asciinema.org/a/49433?autoplay=1)
 
 ## Install
 
