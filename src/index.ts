@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import { Opts } from './interfaces';
+import { Opts, Preset } from './interfaces';
 import presets from './presets';
 
 /**
@@ -9,7 +9,7 @@ import presets from './presets';
  * @param  {object} options
  * @return {boolean} Whether or not the message was valid
  */
-const validateMessage = function(message: string, options: Opts = {}): boolean {
+function validateMessage(message: string, options: Opts = {}): boolean {
   if (!message) {
     return false;
   }
@@ -20,13 +20,13 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
     preset: 'angular'
   }, options);
 
-  const preset = presets[options.preset];
+  const preset: Preset = presets[options.preset];
 
   if (!preset) {
     throw new Error(`Preset '${options.preset}' does not exist. A preset must be provided`);
   }
 
-  const {validate, ignorePattern} = preset;
+  const { validate, ignorePattern }: Preset = preset;
 
   if (ignorePattern && ignorePattern.test(message)) {
     if (process.env.SILENT === 'true' || !process.env.SILENT) {
@@ -45,7 +45,7 @@ const validateMessage = function(message: string, options: Opts = {}): boolean {
  * @param  {Buffer} buffer
  * @return {string}
  */
-const getMessageFromBuffer = function(buffer: Buffer): string {
+function getMessageFromBuffer(buffer: Buffer): string {
   return buffer.toString();
 };
 
@@ -55,9 +55,9 @@ const getMessageFromBuffer = function(buffer: Buffer): string {
  * @param {object} options
  * @return {boolean}
  */
-const validateMessageFromFile = function(file: string, options: Opts = {}) {
-  const buffer = fs.readFileSync(file);
-  const message = getMessageFromBuffer(buffer);
+function validateMessageFromFile(file: string, options: Opts = {}): boolean {
+  const buffer: Buffer = fs.readFileSync(file);
+  const message: string = getMessageFromBuffer(buffer);
 
   return validateMessage(message, options);
 };

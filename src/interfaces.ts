@@ -1,4 +1,4 @@
-export type Preset = 'angular' | 'atom' | 'eslint' | 'ember';
+export type PresetTypes = 'angular' | 'atom' | 'ember' | 'eslint' | 'jquery' | 'jshint';
 
 export interface LogLevels {
   [severity: string]: {
@@ -6,13 +6,15 @@ export interface LogLevels {
   };
 }
 
+export interface Preset {
+  ignorePattern?: RegExp;
+  validate(message: string): boolean;
+}
+
 export interface Presets {
-  [preset: string]: {
-    validate(message: string): boolean;
-    ignorePattern?: RegExp;
-  };
+  [preset: string]: Preset;
 }
 
 export interface Opts {
-  preset?: Preset;
+  preset?: PresetTypes;
 }

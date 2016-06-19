@@ -19,7 +19,7 @@ const LOG_LEVELS: LogLevels = {
 
 type Severity = 'error' | 'warn' | 'info' | 'debug';
 
-const log = function(message: string, severity: Severity = 'info'): void {
+function log(message: string, severity: Severity = 'info'): void {
   const color: string = LOG_LEVELS[severity].color || 'cyan';
 
   if (process.env.SILENT !== 'true') {
@@ -29,7 +29,7 @@ const log = function(message: string, severity: Severity = 'info'): void {
 
 const presets: Presets = {
   angular: {
-    validate(message) {
+    validate(message: string): boolean {
       /**
        * Git COMMIT-MSG hook for validating commit message
        * See https://docs.google.com/document/d/1rk04jEuGfk9kYzfqCuOlPTSJw3hEDZJTBN5E5f1SALo/edit
@@ -41,7 +41,7 @@ const presets: Presets = {
        */
       const MAX_LENGTH: number = 100;
       const PATTERN: RegExp = /^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-]*)\))?\: (.*)$/;
-      const TYPES = {
+      const TYPES: any = {
         feat: true,
         fix: true,
         docs: true,
@@ -62,7 +62,7 @@ const presets: Presets = {
         return false;
       }
 
-      const match = PATTERN.exec(message);
+      const match: RegExpExecArray = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<type>(<scope>): <subject>"! was: ${message}`, 'error');
@@ -70,10 +70,10 @@ const presets: Presets = {
         return false;
       }
 
-      const type = match[1];
+      const type: string = match[1];
       // in case they are needed
-      // const scope = match[3];
-      // const subject = match[4];
+      // const scope: string = match[3];
+      // const subject: string = match[4];
 
       if (!TYPES.hasOwnProperty(type)) {
         log(`'${type}' is not an allowed type!`, 'error');
@@ -87,7 +87,7 @@ const presets: Presets = {
     ignorePattern: /^WIP\:/
   },
   atom: {
-    validate(message) {
+    validate(message: string): boolean {
       const MAX_LENGTH: number = 72;
       const EMOJIS: Array<string> = [
         ':art:',
@@ -117,7 +117,7 @@ const presets: Presets = {
         return false;
       }
 
-      const match = PATTERN.exec(message);
+      const match: RegExpExecArray = PATTERN.exec(message);
 
       if (!match) {
         log(`Message does not match "<emoji> <subject>"! was: ${message}`, 'error');
@@ -130,17 +130,17 @@ const presets: Presets = {
     }
   },
   eslint: {
-    validate(message) {
+    validate(message: string): boolean {
       // Fixup pattern (optional)
-      const FIXUP = '(?:fixup!\\s*)?';
+      const FIXUP: string = '(?:fixup!\\s*)?';
       // A string starting with an uppercase character
-      const TAG = '([A-Z][a-z]+)';
+      const TAG: string = '([A-Z][a-z]+)';
       // A github issue reference - e.g., #1234, GH-1, gh-1, user/repo#1234
-      const GH = '(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+)';
+      const GH: string = '(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+)';
       // Any string starting with an uppercase character or a digit and not referencing a github issue
-      const MESSAGE = `((?=[A-Z0-9])(?:(?!${GH}).)*)`;
+      const MESSAGE: string = `((?=[A-Z0-9])(?:(?!${GH}).)*)`;
       // Zero or more comma-separated github references preceded by the word "fixes" or "refs", enclosed by parentheses
-      const ISSUE = `(\\s\\((?:(?:(?:fixes|refs)\\s${GH})(?:,\\s(?!\\))|\\)))+)?`;
+      const ISSUE: string = `(\\s\\((?:(?:(?:fixes|refs)\\s${GH})(?:,\\s(?!\\))|\\)))+)?`;
       const PATTERN: RegExp = new RegExp(`^${FIXUP}${TAG}:\\s${MESSAGE}${ISSUE}$`);
 
       // Pattern is:
@@ -154,13 +154,15 @@ const presets: Presets = {
       // only care about the first line
       message = message.split('\n').shift();
 
-      const match = PATTERN.exec(message);
+      const match: RegExpExecArray = PATTERN.exec(message);
+
       if (!match) {
         log('Message does not match "Tag: Message (fixes #1234)".', 'error');
         log(`Given: "${message}".`, 'info');
 
         return false;
       }
+
       const matches: Array<string> = match.filter(str => str ? true : false).map(str => str.trim());
       // Is input tag ok?
       const TAGS: Array<string> = ['Fix', 'Update', 'Breaking', 'Docs', 'Build', 'New', 'Upgrade'];
@@ -176,7 +178,7 @@ const presets: Presets = {
     ignorePattern: /^WIP\:/
   },
   ember: {
-    validate(message) {
+    validate(message: string): boolean {
       const TAGS: Array<string> = [
         'DOC',
         'FEATURE',
@@ -200,7 +202,7 @@ const presets: Presets = {
       // match[1] = <tag>
       // match[2] = <message>
       // match[3] = <git-message>
-      const match = PATTERN.exec(message);
+      const match: RegExpExecArray = PATTERN.exec(message);
 
       if (!match) {
         log('Message does not match "[<tag> <message>] <git-message>"', 'error');
@@ -209,8 +211,8 @@ const presets: Presets = {
         return false;
       }
 
-      const tag = match[1];
-      const msg = match[2];
+      const tag: string = match[1];
+      const msg: string = match[2];
 
       if (tag === 'DOC' && VALID_CHANNELS.indexOf(msg) === -1) {
         log('Not a valid channel for DOC', 'error');
@@ -223,15 +225,15 @@ const presets: Presets = {
     }
   },
   jquery: {
-    validate(message) {
+    validate(message: string): boolean {
       const SUBJECT_MAX_LENGTH: number = 72;
       const LONG_DESCRIPTION_MAX_LENGTH: number = 80;
       const SUBJECT_PATTERN: RegExp = /^(\w*): ([\w\s\S]*[^.])$/;
 
-      const messageParts = message.trim().split('\n').map(line => line.trim());
+      const messageParts: string[] = message.trim().split('\n').map(line => line.trim());
 
-      const subject = messageParts[0];
-      const match = SUBJECT_PATTERN.exec(subject);
+      const subject: string = messageParts[0];
+      const match: RegExpExecArray = SUBJECT_PATTERN.exec(subject);
 
       if (subject.length > SUBJECT_MAX_LENGTH) {
         log(`Subject is longer than ${SUBJECT_MAX_LENGTH} characters.`, 'error');
@@ -246,7 +248,7 @@ const presets: Presets = {
         return false;
       }
 
-      const isMessageLengthValid = messageParts.slice(1).every(function(part: string) {
+      const isMessageLengthValid: boolean = messageParts.slice(1).every(function(part: string): boolean {
         return part.length < LONG_DESCRIPTION_MAX_LENGTH;
       });
 
@@ -260,30 +262,31 @@ const presets: Presets = {
     }
   },
   jshint: {
-    validate(message) {
+    validate(message: string): boolean {
       const HEADER_LENGTH: number = 60;
       const LINES_LENGTH: number = 100;
 
       // A github issue reference - e.g., #1234, GH-1, gh-1, user/repo#1234
-      const GH = '(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+)';
+      const GH: string = '(?:(?:[A-Za-z0-9_-]+)\\/(?:[A-Za-z0-9_.-]+))?(?:(?:#|[Gg][Hh]-)\\d+)';
       // Any string starting with an uppercase character or a digit and not referencing a github issue
-      const SHORTDESCR = `((?=[A-Z0-9])(?:(?!${GH}).)*)`;
+      const SHORTDESCR: string = `((?=[A-Z0-9])(?:(?!${GH}).)*)`;
       // [[TYPE]] part
-      const TITLE = '\\[{2}([A-Z]+)\\]{2}';
+      const TITLE: string = '\\[{2}([A-Z]+)\\]{2}';
       // Fixup pattern (optional)
-      const FIXUP = '(?:fixup!\\s*)?';
+      const FIXUP: string = '(?:fixup!\\s*)?';
       const HEADER_PATTERN: RegExp = new RegExp(`^${FIXUP}${TITLE}\\s${SHORTDESCR}$`);
 
-      const lines = message.trim().split('\n').map(line => line.trim());
+      const lines: string[] = message.trim().split('\n').map(line => line.trim());
+      const header: string = lines.shift();
 
-      const header = lines.shift();
       if (header.length > HEADER_LENGTH) {
         log(`Header is longer than ${HEADER_LENGTH} characters.`, 'error');
 
         return false;
       }
 
-      const match = HEADER_PATTERN.exec(header);
+      const match: RegExpExecArray = HEADER_PATTERN.exec(header);
+
       if (!match) {
         log('Header does not match "[[TYPE]] Short description".', 'error');
         log(`Given: "${header}".`, 'info');
@@ -292,7 +295,8 @@ const presets: Presets = {
       }
 
       // Is input title ok?
-      const TITLES: Array<string> = ['FIX', 'FEAT', 'DOCS', 'TEST', 'CHORE'];
+      const TITLES: string[] = ['FIX', 'FEAT', 'DOCS', 'TEST', 'CHORE'];
+
       if (TITLES.indexOf(match[1]) === -1) {
         log(`The word "${match[1]}" is not an allowed title.`, 'error');
         log(`Valid titles are: ${TITLES.join(', ')}.`, 'info');
@@ -305,9 +309,10 @@ const presets: Presets = {
         return true;
       }
 
+      const secondLine: string = lines.shift();
+
       // Is second line a blank one?
-      const blankln: string = lines.shift();
-      if (blankln.length !== 0) {
+      if (secondLine.length > 0) {
         log('Second line of commit message must be a blank line.', 'error');
 
         return false;
