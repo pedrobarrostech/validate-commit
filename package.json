@@ -1,6 +1,6 @@
 {
   "name": "validate-commit",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Validate commit messages according to various presets",
   "main": "dist/index.js",
   "author": "Will Soto <will.soto9+github@gmail.com>",
