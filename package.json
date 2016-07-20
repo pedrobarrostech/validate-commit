@@ -68,7 +68,7 @@
     "docs": "typedoc --out docs/ src/",
     "postdocs": "./gh-pages.js",
     "prerelease": "npm test",
-    "release": "standard-version && git push --follow-tags origin master"
+    "release": "standard-version --sign && git push --follow-tags origin master"
   },
   "dependencies": {
     "chalk": "^1.1.1",
