@@ -51,19 +51,18 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "clean": "rimraf dist typings",
+    "clean": "rimraf dist",
     "lint": "tslint src/**/*.ts test/**/*.ts",
     "watch": "tsc --watch",
     "pretest": "npm run build",
     "test": "SILENT='true' mocha --compilers js:babel-core/register",
     "test-watch": "npm test -- --watch",
-    "prebuild": "npm run clean && npm run typings:install",
+    "prebuild": "npm run clean",
     "build": "tsc",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha -- -R spec",
     "coveralls": "npm run coverage -s && coveralls < coverage/lcov.info",
     "postcoveralls": "rimraf ./coverage",
     "prepublish": "npm run build",
-    "typings:install": "typings install",
     "predocs": "rimraf docs/",
     "docs": "typedoc --out docs/ src/",
     "postdocs": "./gh-pages.js",
@@ -71,6 +70,10 @@
     "release": "standard-version --sign && git push --follow-tags origin master"
   },
   "dependencies": {
+    "@types/chai": "^3.4.29",
+    "@types/chalk": "^0.4.28",
+    "@types/mocha": "^2.2.28",
+    "@types/node": "^4.0.30",
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
     "is-file": "^1.0.0"
@@ -94,8 +97,7 @@
     "ts-node": "^1.1.0",
     "tslint": "^3.6.0",
     "typedoc": "^0.4.2",
-    "typescript": "^1.8.9",
-    "typings": "^1.0.2"
+    "typescript": "^2.0.0"
   },
   "babel": {
     "presets": [

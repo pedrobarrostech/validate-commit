@@ -12,9 +12,5 @@
     "pretty": true,
     "removeComments": true,
     "target": "ES5"
-  },
-  "files": [
-    "src/index.ts",
-    "typings/index.d.ts"
-  ]
+  }
 }
