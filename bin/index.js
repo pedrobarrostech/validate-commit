@@ -1,40 +1,54 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+var yargs = require('yargs');
 var isFile = require('is-file');
 
-var pkg = require('../package.json');
+var validate = require('../dist');
 
-var validateMessage = require('../dist').validateMessage;
-var validateMessageFromFile = require('../dist').validateMessageFromFile;
+var argv = yargs
+  .usage('validate-commit-msg <message>')
+  .option('preset', {
+    alias: 'p',
+    type: 'string',
+    'default': 'angular',
+    description: 'specify a preset',
+    choices: [
+      'angular',
+      'atom',
+      'eslint',
+      'ember',
+      'jquery',
+      'jshint'
+    ]
+  })
+  .option('silent', {
+    alias: 's',
+    type: 'boolean',
+    'default': false,
+    description: 'mute log messages'
+  })
+  .version()
+  .help()
+  .argv;
 
-program._name = 'validate-commit-msg';
-program
-  .version(pkg.version)
-  .description(pkg.description)
-  .command('validate-commit-msg <message>', 'validate a message')
-  .option('-p, --preset <preset>', 'specify a preset (angular|atom|eslint|ember|jquery|jshint) [angular]', 'angular')
-  .option('-s, --silent', 'mute log messages [false]', false)
-  .action(function(message) {
-    var valid = false;
-    var options = {
-      preset: program.preset
-    };
+var valid = false;
 
-    if (program.silent) {
-      process.env.SILENT = true;
-    }
+var message = argv._[0];
+var options = {
+  preset: argv.preset
+};
 
-    if (isFile(message)) {
-      valid = validateMessageFromFile(message, options);
-    } else {
-      valid = validateMessage(message, options);
-    }
+if (argv.silent) {
+  process.env.SILENT = true;
+}
 
-    if (valid === false) {
-      process.exit(1);
-    }
-    process.exit(0);
-  });
+if (isFile(message)) {
+  valid = validate.validateMessageFromFile(message, options);
+} else {
+  valid = validate.validateMessage(message, options);
+}
 
-program.parse(process.argv);
+if (valid === false) {
+  process.exit(1);
+}
+process.exit(0);
