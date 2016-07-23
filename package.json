@@ -3,12 +3,16 @@
   "version": "2.3.1",
   "description": "Validate commit messages according to various presets",
   "main": "dist/index.js",
-  "author": "Will Soto <will.soto9+github@gmail.com>",
+  "author": {
+    "name": "Will Soto",
+    "email": "will.soto9+github@gmail.com",
+    "url": "https://github.com/paradox41"
+  },
   "contributors": [
     {
       "name": "Leo Di Donato",
       "email": "leodidonato@gmail.com",
-      "url": "http://github.com/leodido"
+      "url": "https://github.com/leodido"
     }
   ],
   "license": "Apache-2.0",
