@@ -8,7 +8,9 @@
 
 > Validate commit messages according to various presets
 
-![validate-commit](./example.gif)
+<p align="center">
+  <img src="./example.gif">
+</p>
 
 ## Install
 
