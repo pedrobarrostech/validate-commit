@@ -128,7 +128,7 @@ This module, like many others, installs an executable in **./node_modules/.bin**
 
 ### Development
 
-`npm i && typings install`
+`npm i`
 
 ## License
 
