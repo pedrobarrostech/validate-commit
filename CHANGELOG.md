@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/paradox41/validate-commit/compare/v2.3.2...v3.0.0) (2016-09-24)
+
+
+### Code Refactoring
+
+* **typings:** put typings in their own directory ([38e8f55](https://github.com/paradox41/validate-commit/commit/38e8f55))
+
+
+### BREAKING CHANGES
+
+* typings: typings have moved from dist/ to typings/
+
+Signed-off-by: Will Soto <will.soto9@gmail.com>
+
+
+
 <a name="2.3.2"></a>
 ## [2.3.2](https://github.com/paradox41/validate-commit/compare/v2.3.1...v2.3.2) (2016-08-14)
 
