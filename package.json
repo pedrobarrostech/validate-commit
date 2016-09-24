@@ -22,8 +22,10 @@
   "homepage": "https://github.com/paradox41/validate-commit#readme",
   "files": [
     "bin/",
-    "dist/"
+    "dist/",
+    "typings/"
   ],
+  "typings": "./typings/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paradox41/validate-commit.git"
@@ -45,7 +47,6 @@
   "bin": {
     "validate-commit-msg": "./bin/index.js"
   },
-  "typings": "./dist/index.d.ts",
   "git": {
     "scripts": {
       "commit-msg": "./bin/index.js $1"
@@ -55,7 +56,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist typings",
     "lint": "tslint src/**/*.ts test/**/*.ts",
     "watch": "tsc --watch",
     "pretest": "npm run build",
