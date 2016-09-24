@@ -1,7 +1,28 @@
 import * as fs from 'fs';
 
-import { Opts, Preset } from './interfaces';
-import presets from './presets';
+import {
+  Opts,
+  Preset,
+  Presets
+} from './interfaces';
+
+import {
+  angular,
+  atom,
+  ember,
+  eslint,
+  jquery,
+  jshint
+} from './presets';
+
+const presets: Presets = {
+  angular,
+  atom,
+  eslint,
+  ember,
+  jquery,
+  jshint
+};
 
 /**
  * Validate a commit message according to preset
@@ -61,6 +82,8 @@ function validateMessageFromFile(file: string, options: Opts = {}): boolean {
 
   return validateMessage(message, options);
 };
+
+export default presets;
 
 export {
   validateMessage,

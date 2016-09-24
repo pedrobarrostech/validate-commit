@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import presets from '../dist/presets';
+import presets from '../dist';
 
 describe('presets', function() {
   describe('angular', function() {

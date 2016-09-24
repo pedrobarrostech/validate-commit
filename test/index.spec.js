@@ -1,8 +1,12 @@
+import path from 'path';
+
 import { expect } from 'chai';
 import 'mocha-sinon';
 
-import { validateMessage, validateMessageFromFile } from '../dist';
-import presets from '../dist/presets';
+import presets, {
+  validateMessage,
+  validateMessageFromFile
+} from '../dist';
 
 describe('#validateMessage', function() {
   it('should return false if no message is provided', function() {
@@ -48,8 +52,8 @@ describe('#validateMessageFromFile', function() {
   const wrongFixture = {};
 
   for (let preset in presets) {
-    validFixture[preset] = `${__dirname}/fixtures/${preset}/valid.txt`;
-    wrongFixture[preset] = `${__dirname}/fixtures/${preset}/wrong.txt`;
+    validFixture[preset] = path.resolve(__dirname, 'fixtures', preset, 'valid.txt');
+    wrongFixture[preset] = path.resolve(__dirname, 'fixtures', preset, 'wrong.txt');
   }
 
   for (let preset in validFixture) {
@@ -66,7 +70,9 @@ describe('#validateMessageFromFile', function() {
 
   it('should use the default preset', function() {
     const defaultPreset = 'angular';
-    expect(validateMessageFromFile(`${__dirname}/fixtures/${defaultPreset}/wrong.txt`)).to.be.false;
+    const fixture = path.resolve(__dirname, 'fixtures', defaultPreset, 'wrong.txt');
+
+    expect(validateMessageFromFile(fixture)).to.be.false;
   });
 });
 

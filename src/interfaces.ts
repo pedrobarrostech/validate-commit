@@ -1,5 +1,7 @@
 export type PresetTypes = 'angular' | 'atom' | 'ember' | 'eslint' | 'jquery' | 'jshint';
 
+export type Severity = 'error' | 'warn' | 'info' | 'debug';
+
 export interface LogLevels {
   [severity: string]: {
     color: string;
