@@ -91,11 +91,6 @@ describe('#logging', function() {
   });
 
   describe('(SILENT ON)', function() {
-    it('should not work when SILENT env variable is true (the default of the testing environment)', function() {
-      validateMessage('invalid message');
-      expect(console.log.calledOnce).to.be.false;
-    });
-
     it('should not work when SILENT env variable is true (boolean)', function() {
       process.env.SILENT = true;
       validateMessage('invalid message');
