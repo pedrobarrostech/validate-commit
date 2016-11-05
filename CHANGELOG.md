@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/paradox41/validate-commit/compare/v3.0.0...v3.0.1) (2016-11-05)
+
+
+### Bug Fixes
+
+* **types:** add dom to fix compilation error ([25b6a0b](https://github.com/paradox41/validate-commit/commit/25b6a0b))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/paradox41/validate-commit/compare/v2.3.2...v3.0.0) (2016-09-24)
 
