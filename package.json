@@ -6,7 +6,7 @@
   "author": {
     "name": "Will Soto",
     "email": "will.soto9+github@gmail.com",
-    "url": "https://github.com/paradox41"
+    "url": "https://github.com/willsoto"
   },
   "contributors": [
     {
@@ -17,9 +17,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/paradox41/validate-commit/issues"
+    "url": "https://github.com/willsoto/validate-commit/issues"
   },
-  "homepage": "https://github.com/paradox41/validate-commit#readme",
+  "homepage": "https://github.com/willsoto/validate-commit#readme",
   "files": [
     "bin/",
     "dist/",
@@ -28,7 +28,7 @@
   "typings": "./typings/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paradox41/validate-commit.git"
+    "url": "git+https://github.com/willsoto/validate-commit.git"
   },
   "keywords": [
     "node",
