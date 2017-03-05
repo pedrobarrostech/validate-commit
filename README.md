@@ -132,19 +132,19 @@ This module, like many others, installs an executable in **./node_modules/.bin**
 
 ## License
 
-Apache-2.0 © [Will Soto](http://github.com/paradox41)
+Apache-2.0 © [Will Soto](http://github.com/willsoto)
 
 [npm-url]: https://npmjs.org/package/validate-commit
 [npm-image]: https://img.shields.io/npm/v/validate-commit.svg?style=flat-square
 
-[travis-url]: https://travis-ci.org/paradox41/validate-commit
-[travis-image]: https://img.shields.io/travis/paradox41/validate-commit.svg?style=flat-square
+[travis-url]: https://travis-ci.org/willsoto/validate-commit
+[travis-image]: https://img.shields.io/travis/willsoto/validate-commit.svg?style=flat-square
 
-[coveralls-url]: https://coveralls.io/r/paradox41/validate-commit
-[coveralls-image]: https://img.shields.io/coveralls/paradox41/validate-commit.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/willsoto/validate-commit
+[coveralls-image]: https://img.shields.io/coveralls/willsoto/validate-commit.svg?style=flat-square
 
-[depstat-url]: https://david-dm.org/paradox41/validate-commit
-[depstat-image]: https://david-dm.org/paradox41/validate-commit.svg?style=flat-square
+[depstat-url]: https://david-dm.org/willsoto/validate-commit
+[depstat-image]: https://david-dm.org/willsoto/validate-commit.svg?style=flat-square
 
 [download-badge]: http://img.shields.io/npm/dm/validate-commit.svg?style=flat-square
 
