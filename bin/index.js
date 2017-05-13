@@ -10,26 +10,18 @@ var argv = yargs
   .option('preset', {
     alias: 'p',
     type: 'string',
-    'default': 'angular',
+    default: 'angular',
     description: 'specify a preset',
-    choices: [
-      'angular',
-      'atom',
-      'eslint',
-      'ember',
-      'jquery',
-      'jshint'
-    ]
+    choices: ['angular', 'atom', 'eslint', 'ember', 'jquery', 'jshint']
   })
   .option('silent', {
     alias: 's',
     type: 'boolean',
-    'default': false,
+    default: false,
     description: 'mute log messages'
   })
   .version()
-  .help()
-  .argv;
+  .help().argv;
 
 var valid = false;
 
@@ -42,10 +34,22 @@ if (argv.silent) {
   process.env.SILENT = true;
 }
 
-if (isFile(message)) {
-  valid = validate.validateMessageFromFile(message, options);
+if (message === undefined) {
+  var gitFolder = path.resolve(process.cwd(), '.git');
+
+  if (!gitFolder) {
+    throw new Error('No .git folder found');
+  }
+
+  var commitMsgFile = path.resolve(gitFolder, 'COMMIT_EDITMSG');
+
+  valid = validate.validateMessageFromFile(commitMsgFile, options);
 } else {
-  valid = validate.validateMessage(message, options);
+  if (isFile(message)) {
+    valid = validate.validateMessageFromFile(message, options);
+  } else {
+    valid = validate.validateMessage(message, options);
+  }
 }
 
 if (valid === false) {

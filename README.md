@@ -39,15 +39,13 @@ Even though there are a couple of other packages that do this, this one has a fe
 
 ## Usage
 
-### With git hooks
+### With Husky
 
-E.g., using [git-scripts][git-scripts-url].
+E.g., using [Husky][husky-url].
 
 ```json
-"git": {
-    "scripts": {
-        "commit-msg": "./node_modules/.bin/validate-commit-msg $1"
-    }
+"scripts": {
+  "commitmsg": "validate-commit-msg"
 }
 ```
 
@@ -151,4 +149,4 @@ Apache-2.0 © [Will Soto](http://github.com/willsoto)
 [download-badge]: http://img.shields.io/npm/dm/validate-commit.svg?style=flat-square
 
 [chalk-url]: https://www.npmjs.com/package/chalk
-[git-scripts-url]: https://www.npmjs.com/package/git-scripts
+[husky-url]: https://www.npmjs.com/package/husky
