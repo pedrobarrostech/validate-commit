@@ -7,7 +7,6 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script src="assets/js/modernizr.js"></script>
 </head>
 <body>
 <header>
@@ -66,15 +65,18 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="validate-commit">Validate Commit</h1>
+				<p><a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/willsoto/validate-commit.svg" alt="Greenkeeper badge"></a></p>
 				<p><a href="https://npmjs.org/package/validate-commit"><img src="https://img.shields.io/npm/v/validate-commit.svg?style=flat-square" alt="NPM version"></a>
-					<a href="https://travis-ci.org/paradox41/validate-commit"><img src="https://img.shields.io/travis/paradox41/validate-commit.svg?style=flat-square" alt="Build Status"></a>
-					<a href="https://coveralls.io/r/paradox41/validate-commit"><img src="https://img.shields.io/coveralls/paradox41/validate-commit.svg?style=flat-square" alt="Coveralls Status"></a>
-					<a href="https://david-dm.org/paradox41/validate-commit"><img src="https://david-dm.org/paradox41/validate-commit.svg?style=flat-square" alt="Dependency Status"></a>
+					<a href="https://travis-ci.org/willsoto/validate-commit"><img src="https://img.shields.io/travis/willsoto/validate-commit.svg?style=flat-square" alt="Build Status"></a>
+					<a href="https://coveralls.io/r/willsoto/validate-commit"><img src="https://img.shields.io/coveralls/willsoto/validate-commit.svg?style=flat-square" alt="Coveralls Status"></a>
+					<a href="https://david-dm.org/willsoto/validate-commit"><img src="https://david-dm.org/willsoto/validate-commit.svg?style=flat-square" alt="Dependency Status"></a>
 				<a href="https://npmjs.org/package/validate-commit"><img src="http://img.shields.io/npm/dm/validate-commit.svg?style=flat-square" alt="Downloads"></a></p>
 				<blockquote>
 					<p>Validate commit messages according to various presets</p>
 				</blockquote>
-				<p><img src="./example.gif" alt="example"></p>
+				<p align="center">
+					<img src="./example.gif">
+				</p>
 				<h2 id="install">Install</h2>
 				<pre><code class="lang-sh">npm install validate-commit --save-dev
 </code></pre>
@@ -97,12 +99,10 @@
 					<li>Logging can be muted via <strong>SILENT</strong> environment variable</li>
 				</ul>
 				<h2 id="usage">Usage</h2>
-				<h3 id="with-git-hooks">With git hooks</h3>
-				<p>E.g., using <a href="https://www.npmjs.com/package/git-scripts">git-scripts</a>.</p>
-				<pre><code class="lang-json">&quot;git&quot;: {
-    &quot;scripts&quot;: {
-        &quot;commit-msg&quot;: &quot;./node_modules/.bin/validate-commit-msg $1&quot;
-    }
+				<h3 id="with-husky">With Husky</h3>
+				<p>E.g., using <a href="https://www.npmjs.com/package/husky">Husky</a>.</p>
+				<pre><code class="lang-json">&quot;scripts&quot;: {
+  &quot;commitmsg&quot;: &quot;validate-commit-msg&quot;
 }
 </code></pre>
 				<h3 id="from-cli">From CLI</h3>
@@ -123,12 +123,12 @@ $ ...
 				<h3 id="within-node">Within node</h3>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> validateCommit = <span class="hljs-built_in">require</span>(<span class="hljs-string">'validate-commit'</span>).validateMessage;
 validateCommit(<span class="hljs-string">'chore(package): some message'</span>); <span class="hljs-comment">// &gt; true</span>
-validateCommit(<span class="hljs-string">'New: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; true</span>
-validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
+validateCommit(<span class="hljs-string">'New: Awesome'</span>, { <span class="hljs-attr">preset</span>: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; true</span>
+validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { <span class="hljs-attr">preset</span>: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
 <span class="hljs-comment">// &gt; The word "Unk" is not an allowed tag.</span>
 <span class="hljs-comment">// &gt; Valid types are: Fix, Update, Breaking, Docs, Build, New, Upgrade.</span>
 process.env.SILENT = <span class="hljs-literal">true</span>;
-validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
+validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { <span class="hljs-attr">preset</span>: <span class="hljs-string">'eslint'</span> }); <span class="hljs-comment">// &gt; false</span>
 </code></pre>
 				<h2 id="api">API</h2>
 				<h3 id="javascript">JavaScript</h3>
@@ -155,9 +155,9 @@ validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span 
     -<span class="hljs-keyword">p</span>, --preset <span class="hljs-symbol">&lt;preset&gt;</span>  specify <span class="hljs-keyword">a</span> preset (angular|atom|eslint|ember|jquery|jshint) [angular]
     -s, --<span class="hljs-keyword">silent</span>           mute <span class="hljs-built_in">log</span> <span class="hljs-keyword">messages</span> [false]</span>
 </code></pre><h3 id="development">Development</h3>
-				<p><code>npm i &amp;&amp; typings install</code></p>
+				<p><code>npm i</code></p>
 				<h2 id="license">License</h2>
-				<p>Apache-2.0 © <a href="http://github.com/paradox41">Will Soto</a></p>
+				<p>Apache-2.0 © <a href="http://github.com/willsoto">Will Soto</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -166,20 +166,35 @@ validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span 
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class="label tsd-is-external">
-						<span>Internals</span>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_helpers_.html">"helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
 					</li>
-					<li class="label tsd-is-external">
-						<span>Externals</span>
-					</li>
-					<li class=" tsd-kind-external-module tsd-is-external">
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_interfaces_.html">"interfaces"</a>
 					</li>
-					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_presets_.html">"presets"</a>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_angular_.html">"presets/angular"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_atom_.html">"presets/atom"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_ember_.html">"presets/ember"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_eslint_.html">"presets/eslint"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_index_.html">"presets/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_jquery_.html">"presets/jquery"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_presets_jshint_.html">"presets/jshint"</a>
 					</li>
 				</ul>
 			</nav>
@@ -250,7 +265,7 @@ validateCommit(<span class="hljs-string">'Unk: Awesome'</span>, { preset: <span 
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

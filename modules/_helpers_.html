@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;interfaces&quot; | validate-commit</title>
+	<title>&quot;helpers&quot; | validate-commit</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_interfaces_.html">&quot;interfaces&quot;</a>
+					<a href="_helpers_.html">&quot;helpers&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;interfaces&quot;</h1>
+			<h1>External module &quot;helpers&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,45 +71,140 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.loglevels.html" class="tsd-kind-icon">Log<wbr>Levels</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.opts.html" class="tsd-kind-icon">Opts</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.preset.html" class="tsd-kind-icon">Preset</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.presets.html" class="tsd-kind-icon">Presets</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_helpers_.html#log" class="tsd-kind-icon">log</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_interfaces_.html#presettypes" class="tsd-kind-icon">Preset<wbr>Types</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_interfaces_.html#severity" class="tsd-kind-icon">Severity</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="_helpers_.html#log_levels" class="tsd-kind-icon">LOG_<wbr>LEVELS</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="presettypes" class="tsd-anchor"></a>
-					<h3>Preset<wbr>Types</h3>
-					<div class="tsd-signature tsd-kind-icon">Preset<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"angular"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"atom"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ember"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"eslint"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"jquery"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"jshint"</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/interfaces.ts#L1">interfaces.ts:1</a></li>
-						</ul>
-					</aside>
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="log" class="tsd-anchor"></a>
+					<h3>log</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, severity<span class="tsd-signature-symbol">?: </span><a href="_interfaces_.html#severity" class="tsd-signature-type">Severity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L23">helpers.ts:23</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> severity: <a href="_interfaces_.html#severity" class="tsd-signature-type">Severity</a><span class="tsd-signature-symbol"> =&nbsp;&quot;info&quot;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="severity" class="tsd-anchor"></a>
-					<h3>Severity</h3>
-					<div class="tsd-signature tsd-kind-icon">Severity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"error"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"warn"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"info"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"debug"</span></div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="log_levels" class="tsd-anchor"></a>
+					<h3>LOG_<wbr>LEVELS</h3>
+					<div class="tsd-signature tsd-kind-icon">LOG_<wbr>LEVELS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/interfaces.ts#L3">interfaces.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L8">helpers.ts:8</a></li>
 						</ul>
 					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-not-exported">
+						<a name="log_levels.debug" class="tsd-anchor"></a>
+						<h3>debug</h3>
+						<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L18">helpers.ts:18</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+							<a name="log_levels.debug.color" class="tsd-anchor"></a>
+							<h3>color</h3>
+							<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;white&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L19">helpers.ts:19</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-not-exported">
+						<a name="log_levels.error" class="tsd-anchor"></a>
+						<h3>error</h3>
+						<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L9">helpers.ts:9</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+							<a name="log_levels.error.color-1" class="tsd-anchor"></a>
+							<h3>color</h3>
+							<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;red&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L10">helpers.ts:10</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-not-exported">
+						<a name="log_levels.info" class="tsd-anchor"></a>
+						<h3>info</h3>
+						<div class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L15">helpers.ts:15</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+							<a name="log_levels.info.color-2" class="tsd-anchor"></a>
+							<h3>color</h3>
+							<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;cyan&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L16">helpers.ts:16</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-not-exported">
+						<a name="log_levels.warn" class="tsd-anchor"></a>
+						<h3>warn</h3>
+						<div class="tsd-signature tsd-kind-icon">warn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L12">helpers.ts:12</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+							<a name="log_levels.warn.color-3" class="tsd-anchor"></a>
+							<h3>color</h3>
+							<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;yellow&quot;</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/willsoto/validate-commit/blob/bd36f44/src/helpers.ts#L13">helpers.ts:13</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
 				</section>
 			</section>
 		</div>
@@ -119,13 +214,13 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_helpers_.html">"helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_index_.html">"index"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_interfaces_.html">"interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -153,23 +248,11 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.loglevels.html" class="tsd-kind-icon">Log<wbr>Levels</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_helpers_.html#log" class="tsd-kind-icon">log</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.opts.html" class="tsd-kind-icon">Opts</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.preset.html" class="tsd-kind-icon">Preset</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.presets.html" class="tsd-kind-icon">Presets</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_interfaces_.html#presettypes" class="tsd-kind-icon">Preset<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_interfaces_.html#severity" class="tsd-kind-icon">Severity</a>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_helpers_.html#log_levels" class="tsd-kind-icon">LOG_<wbr>LEVELS</a>
 					</li>
 				</ul>
 			</nav>
